@@ -41,10 +41,10 @@ Please visit our Website: http://www.httrack.com
 
 #if HTS_USEZLIB
 /* zlib */
-/*
+
 #include <zlib.h>
 #include "htszlib.h"
-*/
+
 
 /*
   Unpack file into a new file

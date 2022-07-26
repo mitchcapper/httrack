@@ -1,0 +1,264 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{a67d72e4-4af7-4cc5-b375-8e4b3fbb2116}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;rc;def;r;odl;idl;hpj;bat</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{a67fc6ba-0048-477f-9b3f-06b97855c9f8}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{efa29025-b07e-4936-b314-9417e50cd852}</UniqueIdentifier>
+      <Extensions>ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="coucal\coucal.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="htsalias.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="htsback.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="htsbauth.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="htscache.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="htscatchurl.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="htscharset.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="htsconcat.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="htscore.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="htscoremain.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="htsencoding.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="htsfilters.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="htsftp.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="htshash.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="htshelp.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="htsindex.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="htslib.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="htsmd5.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="htsmodules.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="htsname.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="htsparse.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="htsrobots.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="htsthread.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="htstools.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="htswizard.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="htswrap.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="htszlib.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="httrack.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="minizip\ioapi.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="minizip\iowin32.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="md5.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="minizip\mztools.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="punycode.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="minizip\unzip.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="minizip\zip.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="mmsrip\common.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="coucal\coucal.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="minizip\crypt.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hts-indextmpl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="htsalias.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="htsback.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="htsbase.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="htsbasenet.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="htsbauth.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="htscache.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="htscatchurl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="htsconfig.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="htscore.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="htscoremain.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="htsdefines.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="htsfilters.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="htsftp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="htsglobal.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="htshash.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="htshelp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="htsindex.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="htslib.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="htsmd5.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="htsmodules.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="htsname.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="htsnet.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="htsopt.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="htsparse.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="htsrobots.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="htsstrings.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="htsthread.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="htstools.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="htswizard.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="htswrap.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="htszlib.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="httrack-library.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="httrack.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="minizip\ioapi.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="minizip\iowin32.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="md5.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="minizip\mztools.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="punycode.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="minizip\unzip.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="minizip\zip.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="changelog.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+</Project>
