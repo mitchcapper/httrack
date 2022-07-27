@@ -44,6 +44,7 @@ Please visit our Website: http://www.httrack.com
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
+#include "path-join/path-join.h"
 #include <fcntl.h>
 #ifdef _WIN32
 #else
@@ -1515,7 +1516,11 @@ static int htslang_load(char *limit_to, const char *path) {
   /* Load master file (list of keys and internal keys) */
   if (!limit_to) {
     const char *mname = "lang.def";
-    FILE *fp = fopen(fconcat(catbuff, sizeof(catbuff), path, mname), "rb");
+	char* pj;
+	pj= path_join(path, mname);
+	strcpy_s(catbuff, CATBUFF_SIZE, pj);
+	free(pj);
+	FILE *fp = fopen(catbuff, "rb");
 
     if (fp) {
       char intkey[8192];
