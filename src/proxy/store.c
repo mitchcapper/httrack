@@ -1936,18 +1936,39 @@ static int getDigit4(const char *const pos) {
     getDigit(pos[2]) * 10 + getDigit(pos[3]);
 }
 
-static time_t getGMT(struct tm *tm) {   /* hey, time_t is local! */
-  time_t t = mktime(tm);
+static int timezone = -9999;
+int time_offset()//https://stackoverflow.com/questions/13804095/get-the-time-zone-gmt-offset-in-c
+{
+	time_t gmt, rawtime = time(NULL);
+	struct tm* ptm;
 
-  if (t != (time_t) - 1 && t != (time_t) 0) {
-    /* BSD does not have static "timezone" declared */
-#if (defined(BSD) || defined(__FreeBSD__) || defined(__OpenBSD__) || defined(__NetBSD__) || defined(__FreeBSD_kernel__))
-    time_t now = time(NULL);
-    time_t timezone = -localtime(&now)->tm_gmtoff;
+#if !defined(WIN32)
+	struct tm gbuf;
+	ptm = gmtime_r(&rawtime, &gbuf);
+#else
+	ptm = gmtime(&rawtime);
 #endif
-    return (time_t) (t - timezone);
-  }
-  return (time_t) - 1;
+	// Request that mktime() looksup dst in timezone database
+	ptm->tm_isdst = -1;
+	gmt = mktime(ptm);
+
+	return (int)difftime(rawtime, gmt);
+}
+static time_t getGMT(struct tm* tm) {   /* hey, time_t is local! */
+	time_t t = mktime(tm);
+
+	if (t != (time_t)-1 && t != (time_t)0) {
+		/* BSD does not have static "timezone" declared */
+#if (defined(BSD) || defined(__FreeBSD__) || defined(__OpenBSD__) || defined(__NetBSD__) || defined(__FreeBSD_kernel__))
+		time_t now = time(NULL);
+		time_t timezone = -localtime(&now)->;
+#elif _WIN32
+		if (timezone == -9999)
+			timezone = time_offset();
+#endif
+		return (time_t)(t - timezone);
+	}
+	return (time_t)-1;
 }
 
 static time_t getArcTimestamp(const char *const line) {

@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\..\..\packages\StoneSteps.zLib.Static.1.2.12.1\build\native\StoneSteps.zLib.Static.props" Condition="Exists('..\..\..\packages\StoneSteps.zLib.Static.1.2.12.1\build\native\StoneSteps.zLib.Static.props')" />
+  <Import Project="..\..\..\packages\openssl-native.1.0.0\build\native\openssl-native.props" Condition="Exists('..\..\..\packages\openssl-native.1.0.0\build\native\openssl-native.props')" />
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
@@ -69,162 +71,100 @@
     <_ProjectFileVersion>17.0.32505.173</_ProjectFileVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <OutDir>C:\temp\proxytrack\Debug\</OutDir>
-    <IntDir>C:\temp\proxytrack\Debug\int\</IntDir>
-    <LinkIncremental>true</LinkIncremental>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <CodeAnalysisRules />
     <CodeAnalysisRuleAssemblies />
+    <IncludePath>$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
-    <IntDir>$(Platform)\$(Configuration)\</IntDir>
-    <LinkIncremental>true</LinkIncremental>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <CodeAnalysisRules />
     <CodeAnalysisRuleAssemblies />
+    <IncludePath>$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <OutDir>C:\temp\proxytrack\Release\</OutDir>
-    <IntDir>C:\temp\proxytrack\Release\int\</IntDir>
-    <LinkIncremental>false</LinkIncremental>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <CodeAnalysisRules />
     <CodeAnalysisRuleAssemblies />
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
-    <IntDir>$(Platform)\$(Configuration)\</IntDir>
-    <LinkIncremental>false</LinkIncremental>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <CodeAnalysisRules />
     <CodeAnalysisRuleAssemblies />
   </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <Optimization>Full</Optimization>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <AdditionalIncludeDirectories>../;../coucal;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>NDEBUG;NO_MALLOCT;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <StringPooling>true</StringPooling>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <WarningLevel>Level3</WarningLevel>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+    <Link>
+      <AdditionalDependencies>Ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapExports>true</MapExports>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <Optimization>Full</Optimization>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <AdditionalIncludeDirectories>../;../coucal;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>NDEBUG;NO_MALLOCT;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <StringPooling>true</StringPooling>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <WarningLevel>Level3</WarningLevel>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+    <Link>
+      <AdditionalDependencies>Ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapExports>true</MapExports>
+    </Link>
+  </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>C:\Dev\httrack\src;C:\Dev\zlib-1.2.8;C:\Dev\minizip;C:\Dev\openssl-1.0.1j\include;C:\Dev\httrack\src\coucal;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>NO_MALLOCT;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <MinimalRebuild>true</MinimalRebuild>
-      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <AdditionalIncludeDirectories>../;../coucal;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_DEBUG;NO_MALLOCT;_CRT_SECURE_NO_WARNINGS;WIN32_LEAN_AND_MEAN;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
-      <BufferSecurityCheck>true</BufferSecurityCheck>
-      <PrecompiledHeader />
       <WarningLevel>Level3</WarningLevel>
-      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
     </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
     <Link>
-      <AdditionalDependencies>Ws2_32.lib;zlib1.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <OutputFile>c:\temp\httrack\proxytrack.exe</OutputFile>
-      <AdditionalLibraryDirectories>C:\temp\debug_libz;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
-      <ProgramDatabaseFile>$(OutDir)proxytrack.pdb</ProgramDatabaseFile>
-      <SubSystem>Console</SubSystem>
-      <RandomizedBaseAddress>false</RandomizedBaseAddress>
-      <DataExecutionPrevention />
-      <TargetMachine>MachineX86</TargetMachine>
+      <AdditionalDependencies>Ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapExports>true</MapExports>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <Midl>
-      <TargetEnvironment>X64</TargetEnvironment>
-    </Midl>
     <ClCompile>
-      <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>C:\Dev\httrack\src;C:\Dev\zlib-1.2.8;C:\Dev\minizip;C:\Dev\openssl-1.0.1j\include;C:\Dev\httrack\src\coucal;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>NO_MALLOCT;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <MinimalRebuild>true</MinimalRebuild>
-      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <AdditionalIncludeDirectories>../;../coucal;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_DEBUG;NO_MALLOCT;_CRT_SECURE_NO_WARNINGS;WIN32_LEAN_AND_MEAN;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
-      <BufferSecurityCheck>true</BufferSecurityCheck>
-      <PrecompiledHeader />
       <WarningLevel>Level3</WarningLevel>
-      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
     </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
     <Link>
-      <AdditionalDependencies>Ws2_32.lib;zlib1.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <OutputFile>c:\temp\httrack64\proxytrack.exe</OutputFile>
-      <AdditionalLibraryDirectories>C:\temp\debug_libz64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
-      <ProgramDatabaseFile>$(OutDir)proxytrack.pdb</ProgramDatabaseFile>
-      <SubSystem>Console</SubSystem>
-      <RandomizedBaseAddress>false</RandomizedBaseAddress>
-      <DataExecutionPrevention />
-      <TargetMachine>MachineX64</TargetMachine>
+      <AdditionalDependencies>Ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <GenerateMapFile>true</GenerateMapFile>
+      <MapExports>true</MapExports>
     </Link>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <ClCompile>
-      <AdditionalIncludeDirectories>C:\Dev\httrack\src;C:\Dev\zlib-1.2.8;C:\Dev\minizip;C:\Dev\openssl-1.0.1j\include;C:\Dev\httrack\src\coucal;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>NO_MALLOCT;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
-      <PrecompiledHeader />
-      <WarningLevel>Level3</WarningLevel>
-      <DebugInformationFormat />
-    </ClCompile>
-    <Link>
-      <AdditionalDependencies>Ws2_32.lib;zlib1.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <OutputFile>O:\HTTrack\httrack\proxytrack.exe</OutputFile>
-      <AdditionalLibraryDirectories>C:\temp\release_libz;C:\temp\Releaselib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
-      <ProgramDatabaseFile>O:\HTTrack\httrack\proxytrack.pdb</ProgramDatabaseFile>
-      <SubSystem>Console</SubSystem>
-      <OptimizeReferences>true</OptimizeReferences>
-      <EnableCOMDATFolding>true</EnableCOMDATFolding>
-      <RandomizedBaseAddress>false</RandomizedBaseAddress>
-      <DataExecutionPrevention />
-      <TargetMachine>MachineX86</TargetMachine>
-    </Link>
-    <PostBuildEvent>
-      <Message>Copying proxytrack to separate package</Message>
-      <Command>"C:\Program Files\Microsoft SDKs\Windows\v6.0A\Bin\signtool.exe" sign /f "Z:\Mes Documents\certificats\httrack-com\httrack-signing-certificate.pfx" /t http://timestamp.verisign.com/scripts/timstamp.dll $(TargetPath)
-copy /Y "O:\HTTrack\httrack\proxytrack.exe" "O:\ProxyTrack\proxytrack\proxytrack.exe"
-copy /Y "C:\Dev\httrack\src\proxy\*.c" "O:\ProxyTrack\proxytrack\src\"
-copy /Y "C:\Dev\httrack\src\proxy\*.h"  "O:\ProxyTrack\proxytrack\src\"
-copy /Y "C:\Dev\httrack\src\proxy\*.vcproj" "O:\ProxyTrack\proxytrack\src\"
-copy /Y "C:\Dev\httrack\src\proxy\*.txt" "O:\ProxyTrack\proxytrack\src\"
-</Command>
-    </PostBuildEvent>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <Midl>
-      <TargetEnvironment>X64</TargetEnvironment>
-    </Midl>
-    <ClCompile>
-      <AdditionalIncludeDirectories>C:\Dev\httrack\src;C:\Dev\zlib-1.2.8;C:\Dev\minizip;C:\Dev\openssl-1.0.1j\include;C:\Dev\httrack\src\coucal;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>NO_MALLOCT;_CRT_SECURE_NO_WARNINGS;_CRT_NONSTDC_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
-      <PrecompiledHeader />
-      <WarningLevel>Level3</WarningLevel>
-      <DebugInformationFormat />
-    </ClCompile>
-    <Link>
-      <AdditionalDependencies>Ws2_32.lib;zlib1.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <OutputFile>O:\HTTrack\httrack\x64\proxytrack.exe</OutputFile>
-      <AdditionalLibraryDirectories>C:\temp\release_libz64;C:\temp\Releaselib64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
-      <ProgramDatabaseFile>O:\HTTrack\httrack\x64\proxytrack.pdb</ProgramDatabaseFile>
-      <SubSystem>Console</SubSystem>
-      <OptimizeReferences>true</OptimizeReferences>
-      <EnableCOMDATFolding>true</EnableCOMDATFolding>
-      <RandomizedBaseAddress>false</RandomizedBaseAddress>
-      <DataExecutionPrevention />
-      <TargetMachine>MachineX64</TargetMachine>
-    </Link>
-    <PostBuildEvent>
-      <Message>Copying proxytrack to separate package</Message>
-      <Command>"C:\Program Files\Microsoft SDKs\Windows\v6.0A\Bin\signtool.exe" sign /f "Z:\Mes Documents\certificats\httrack-com\httrack-signing-certificate.pfx" /t http://timestamp.verisign.com/scripts/timstamp.dll $(TargetPath)
-copy /Y "O:\HTTrack\httrack\proxytrack.exe" "O:\ProxyTrack\proxytrack\proxytrack.exe"
-copy /Y "C:\Dev\httrack\src\proxy\*.c" "O:\ProxyTrack\proxytrack\src\"
-copy /Y "C:\Dev\httrack\src\proxy\*.h"  "O:\ProxyTrack\proxytrack\src\"
-copy /Y "C:\Dev\httrack\src\proxy\*.vcproj" "O:\ProxyTrack\proxytrack\src\"
-copy /Y "C:\Dev\httrack\src\proxy\*.txt" "O:\ProxyTrack\proxytrack\src\"
-</Command>
-    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\coucal\coucal.c" />
@@ -249,5 +189,16 @@ copy /Y "C:\Dev\httrack\src\proxy\*.txt" "O:\ProxyTrack\proxytrack\src\"
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
+    <Import Project="..\..\..\packages\openssl-native.1.0.0\build\native\openssl-native.targets" Condition="Exists('..\..\..\packages\openssl-native.1.0.0\build\native\openssl-native.targets')" />
+    <Import Project="..\..\..\packages\StoneSteps.zLib.Static.1.2.12.1\build\native\StoneSteps.zLib.Static.targets" Condition="Exists('..\..\..\packages\StoneSteps.zLib.Static.1.2.12.1\build\native\StoneSteps.zLib.Static.targets')" />
   </ImportGroup>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\..\..\packages\openssl-native.1.0.0\build\native\openssl-native.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\packages\openssl-native.1.0.0\build\native\openssl-native.props'))" />
+    <Error Condition="!Exists('..\..\..\packages\openssl-native.1.0.0\build\native\openssl-native.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\packages\openssl-native.1.0.0\build\native\openssl-native.targets'))" />
+    <Error Condition="!Exists('..\..\..\packages\StoneSteps.zLib.Static.1.2.12.1\build\native\StoneSteps.zLib.Static.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\packages\StoneSteps.zLib.Static.1.2.12.1\build\native\StoneSteps.zLib.Static.props'))" />
+    <Error Condition="!Exists('..\..\..\packages\StoneSteps.zLib.Static.1.2.12.1\build\native\StoneSteps.zLib.Static.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\packages\StoneSteps.zLib.Static.1.2.12.1\build\native\StoneSteps.zLib.Static.targets'))" />
+  </Target>
 </Project>

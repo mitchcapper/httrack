@@ -65,4 +65,7 @@
       <Filter>Resource Files</Filter>
     </Text>
   </ItemGroup>
+  <ItemGroup>
+    <Library Include="$(ZLibDir)lib\$(Platform)\$(Configuration)\$(ZLibName).lib" />
+  </ItemGroup>
 </Project>

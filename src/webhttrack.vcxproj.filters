@@ -21,6 +21,15 @@
     <ClCompile Include="htsweb.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="C:\software\httrack-windows\httrack\src\path-join\path-join.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\software\httrack-windows\httrack\src\path-join\str-ends-with.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\software\httrack-windows\httrack\src\path-join\str-starts-with.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="htsserver.h">
@@ -29,8 +38,20 @@
     <ClInclude Include="htsweb.h">
       <Filter>Resource Files</Filter>
     </ClInclude>
+    <ClInclude Include="C:\software\httrack-windows\httrack\src\path-join\path-join.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\software\httrack-windows\httrack\src\path-join\str-ends-with.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\software\httrack-windows\httrack\src\path-join\str-starts-with.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="$(ZLibDir)lib\$(Platform)\$(Configuration)\$(ZLibName).lib" />
   </ItemGroup>
 </Project>
