@@ -887,7 +887,7 @@ static void print_backtrace(void) {
   }
 #else
   const char msg[] = "No stack trace available on this OS :(\n";
-  if (write(FD_ERR, msg, sizeof(msg) - 1) != sizeof(msg) - 1) {
+  if (_write(FD_ERR, msg, sizeof(msg) - 1) != sizeof(msg) - 1) {
     /* sorry GCC */
   }
 #endif
@@ -925,9 +925,9 @@ static void sig_fatal(int code) {
   size = sizeof(msg) - 1;
   size += print_num(&buffer[size], code);
   buffer[size++] = '\n';
-  (void) (write(FD_ERR, buffer, size) == size);
+  (void) (_write(FD_ERR, buffer, size) == size);
   print_backtrace();
-  (void) (write(FD_ERR, msgreport, sizeof(msgreport) - 1)
+  (void) (_write(FD_ERR, msgreport, sizeof(msgreport) - 1)
     == sizeof(msgreport) - 1);
   abort();
 }

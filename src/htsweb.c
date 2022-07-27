@@ -314,10 +314,10 @@ static void back_launch_cmd(void *pP) {
   /* copy commandline */
   if (commandReturnCmdl)
     free(commandReturnCmdl);
-  commandReturnCmdl = strdup(cmd);
+  commandReturnCmdl = _strdup(cmd);
 
   /* split */
-  argv[0] = strdup("webhttrack");
+  argv[0] = _strdup("webhttrack");
   argv[1] = cmd;
   argc++;
   i = 0;
@@ -350,7 +350,7 @@ static void back_launch_cmd(void *pP) {
   if (commandReturn) {
     if (commandReturnMsg)
       free(commandReturnMsg);
-    commandReturnMsg = strdup(hts_errmsg(opt));
+    commandReturnMsg = _strdup(hts_errmsg(opt));
   }
 
   /* free */
@@ -374,7 +374,7 @@ static void back_launch_cmd(void *pP) {
 void webhttrack_main(char *cmd) {
   commandRunning = 1;
   DEBUG(fprintf(stderr, "commandRunning=1\n"));
-  hts_newthread(back_launch_cmd, (void *) strdup(cmd));
+  hts_newthread(back_launch_cmd, (void *) _strdup(cmd));
   background_threads++; /* Do not wait for this thread! */
 }
 

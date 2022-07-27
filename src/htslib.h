@@ -455,8 +455,8 @@ HTS_STATIC int strcmpnocase(const char *a, const char *b) {
 }
 
 #ifdef _WIN32
-#define strcasecmp(a,b) stricmp(a,b)
-#define strncasecmp(a,b,n) strnicmp(a,b,n)
+#define strcasecmp(a,b) _stricmp(a,b)
+#define strncasecmp(a,b,n) _strnicmp(a,b,n)
 #define snprintf _snprintf
 #endif
 

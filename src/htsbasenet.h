@@ -41,7 +41,10 @@ Please visit our Website: http://www.httrack.com
 #else
 
 #undef HTS_USESCOPEID
-#define WIN32_LEAN_AND_MEAN
+#ifndef WIN32_LEAN_AND_MEAN
+	#define WIN32_LEAN_AND_MEAN
+#endif // !WIN32_LEAN_AND_MEAN
+
 // KB955045 (http://support.microsoft.com/kb/955045)
 // To execute an application using this function on earlier versions of Windows
 // (Windows 2000, Windows NT, and Windows Me/98/95), then it is mandatary to #include Ws2tcpip.h

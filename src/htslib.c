@@ -2564,7 +2564,7 @@ void deletesoc(T_SOC soc) {
     if (closesocket(soc) != 0) {
       int err = WSAGetLastError();
 
-      fprintf(stderr, "* error closing socket %d: %s\n", soc, strerror(err));
+      fprintf(stderr, "* error closing socket %I64d: %s\n", (__int64)soc, strerror(err));
     }
 #else
     if (close(soc) != 0) {
@@ -3005,7 +3005,7 @@ int finput(T_SOC fd, char *s, int max) {
 
   do {
     //c=fgetc(fp);
-    if (read((int) fd, &c, 1) <= 0) {
+    if (_read((int) fd, &c, 1) <= 0) {
       c = 0;
     }
     if (c != 0) {
@@ -4439,7 +4439,7 @@ HTSEXT_API const char *hts_rootdir(char *file) {
           strc.path[0] = '\0';
       }
       if (!strnotempty(strc.path)) {
-        if (getcwd(strc.path, sizeof(strc.path)) == NULL)
+        if (_getcwd(strc.path, sizeof(strc.path)) == NULL)
           strc.path[0] = '\0';
         else
           strcatbuff(strc.path, "/");
@@ -5894,7 +5894,7 @@ void *hts_get_callback(t_hts_htmlcheck_callbacks * callbacks, const char *name) 
 /* libc stubs */
 
 HTSEXT_API char *hts_strdup(const char *str) {
-  return strdup(str);
+  return _strdup(str);
 }
 
 HTSEXT_API void *hts_malloc(size_t size) {

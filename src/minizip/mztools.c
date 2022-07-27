@@ -43,7 +43,7 @@ int ZEXPORT unzRepair(const char* file, const char* fileOut,
     char filename[1024];
     char extra[1024];
     int offset = 0;
-    int offsetCD = 0;
+    size_t offsetCD = 0;
     while ( fread(header, 1, 30, fpZip) == 30 ) {
       int currentOffset = offset;
 

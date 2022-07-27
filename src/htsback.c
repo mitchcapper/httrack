@@ -589,7 +589,7 @@ int back_finalize(httrackp * opt, cache_back * cache, struct_back * sback,
                 }
               }
               /* ensure that no remaining temporary file exists */
-              unlink(back[p].tmpfile);
+              _unlink(back[p].tmpfile);
               back[p].tmpfile = NULL;
             }
             // stats
@@ -987,7 +987,7 @@ int back_serialize_ref(httrackp * opt, const lien_back * src) {
 
   if (fp == NULL) {
 #ifdef _WIN32
-    if (mkdir
+    if (_mkdir
         (fconcat(OPT_GET_BUFF(opt), OPT_GET_BUFF_SIZE(opt), StringBuff(opt->path_log), CACHE_REFNAME))
         == 0)
 #else
@@ -1366,7 +1366,7 @@ int back_clear_entry(lien_back * back) {
     }
     // only for security
     if (back->tmpfile && back->tmpfile[0] != '\0') {
-      (void) unlink(back->tmpfile);
+      (void) _unlink(back->tmpfile);
       back->tmpfile = NULL;
     }
     // headers

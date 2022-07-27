@@ -220,7 +220,7 @@ static HTS_INLINE HTS_UNUSED char* strcpy_safe_(char *const dest, const size_t s
 #define malloct(A)          malloc(A)
 #define calloct(A,B)        calloc((A), (B))
 #define freet(A)            do { if ((A) != NULL) { free(A); (A) = NULL; } } while(0)
-#define strdupt(A)          strdup(A)
+#define strdupt(A)          _strdup(A)
 #define realloct(A,B)       realloc(A, B)
 #define memcpybuff(A, B, N) memcpy((A), (B), (N))
 

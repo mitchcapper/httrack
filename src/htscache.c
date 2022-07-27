@@ -1406,9 +1406,9 @@ void cache_init(cache_back * cache, httrackp * opt) {
 #endif
     if (!cache->ro) {
 #ifdef _WIN32
-      mkdir(fconcat(OPT_GET_BUFF(opt), OPT_GET_BUFF_SIZE(opt), StringBuff(opt->path_log), "hts-cache"));
+      _mkdir(fconcat(OPT_GET_BUFF(opt), OPT_GET_BUFF_SIZE(opt), StringBuff(opt->path_log), "hts-cache"));
 #else
-      mkdir(fconcat(OPT_GET_BUFF(opt), OPT_GET_BUFF_SIZE(opt), StringBuff(opt->path_log), "hts-cache"),
+      _mkdir(fconcat(OPT_GET_BUFF(opt), OPT_GET_BUFF_SIZE(opt), StringBuff(opt->path_log), "hts-cache"),
             HTS_PROTECT_FOLDER);
 #endif
       if ((fexist(fconcat(OPT_GET_BUFF(opt), OPT_GET_BUFF_SIZE(opt), StringBuff(opt->path_log), "hts-cache/new.zip")))) {       // il existe déja un cache précédent.. renommer
@@ -1575,7 +1575,7 @@ void cache_init(cache_back * cache, httrackp * opt) {
                                                       StringBuff(opt->path_log),
                                                       "hts-cache/repair.tmp"),
              &repaired, &repairedBytes) == Z_OK) {
-          unlink(name);
+          _unlink(name);
           rename(fconcat
                  (OPT_GET_BUFF(opt), OPT_GET_BUFF_SIZE(opt), StringBuff(opt->path_log),
                   "hts-cache/repair.zip"), name);

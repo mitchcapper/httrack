@@ -332,7 +332,7 @@ void help_wizard(httrackp * opt) {
       printf("\n");
 
       // couper en morceaux
-      argv[0] = strdup("winhttrack");
+      argv[0] = _strdup("winhttrack");
       argv[1] = cmd;
       argc++;
       while(cmd[i]) {

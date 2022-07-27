@@ -586,8 +586,8 @@ HTS_STATIC char *hts_getCharsetFromContentType(const char *mime) {
 }
 
 #ifdef _WIN32
-#define strcasecmp(a,b) stricmp(a,b)
-#define strncasecmp(a,b,n) strnicmp(a,b,n)
+#define strcasecmp(a,b) _stricmp(a,b)
+#define strncasecmp(a,b,n) _strnicmp(a,b,n)
 #endif
 
 static int is_space(char c) {
