@@ -9,12 +9,12 @@ Notable changes made on this fork:
 - WinHTTrack now pulls httrack in as a sub module for better organization and easier build
 - Updated versions of zlib/openssl for windows to much newer versions
 - The following PR from the original GH repo have been (or will be) merged:
-	- [ ] https://github.com/xroche/httrack/pull/135
-	- [ ] https://github.com/xroche/httrack/pull/172
-	- [ ] https://github.com/xroche/httrack/pull/199
-	- [ ] https://github.com/xroche/httrack/pull/220
-	- [ ] https://github.com/xroche/httrack/pull/221
-	- [ ] https://github.com/xroche/httrack/pull/227
+	- [ x ] https://github.com/xroche/httrack/pull/135
+	- [ x ] https://github.com/xroche/httrack/pull/172
+	- [ x ] https://github.com/xroche/httrack/pull/199
+	- [ x ] https://github.com/xroche/httrack/pull/220
+	- [ x ] https://github.com/xroche/httrack/pull/221
+	- [ x ] https://github.com/xroche/httrack/pull/227
 
 
 
@@ -49,4 +49,4 @@ cd httrack
 ### For Windows
 For Windows you want to not clone this repo but rather: https://github.com/mitchcapper/httrack-windows it will pull this repo in.  You can then option the solution file in VS (tested with 2022) and it should hopefully compile (needs v143 build tools for C++).  
 
-Alternatively you can compile using MinGW/msys tools.
+Alternatively you can compile using MinGW/msys tools.  Note it currently sets to v143 build tools and Win10 as the minimums.  If you need to run on older systems likely adjusting those down would not cause issues.
