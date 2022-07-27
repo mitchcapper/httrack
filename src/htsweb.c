@@ -176,7 +176,7 @@ int main(int argc, char *argv[]) {
   if (argc < 2 || (argc % 2) != 0) {
     fprintf(stderr, "** Warning: use the webhttrack frontend if available\n");
     fprintf(stderr,
-            "usage: %s [--port <port>] [--ppid parent-pid] <path-to-html-root-dir> [key value [key value]..]\n",
+            "usage: %s <path-to-html-root-dir> [--port <port>] [--ppid parent-pid] [key value [key value]..]\n",
             argv[0]);
     fprintf(stderr, "example: %s /usr/share/httrack/\n", argv[0]);
     return 1;
