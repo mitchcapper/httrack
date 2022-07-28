@@ -944,7 +944,7 @@ static void sig_fatal(int code) {
   size = sizeof(msg) - 1;
   size += print_num(&buffer[size], code);
   buffer[size++] = '\n';
-  (void) (_write(FD_ERR, buffer, size) == size);
+  (void) (_write(FD_ERR, buffer, (unsigned int)size) == size);
   print_backtrace();
   (void) (_write(FD_ERR, msgreport, sizeof(msgreport) - 1)
     == sizeof(msgreport) - 1);

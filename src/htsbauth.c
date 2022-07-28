@@ -340,9 +340,9 @@ errno_t cjson_SafeReadString(const cJSON* object, const char* string_property, c
 	strcpy_s(buffer, buffer_size, tmp->valuestring);
 	return 0;
 }
-errno_t cjson_SafeWriteString(const cJSON* object, const char* string_property, const char* string_val) {
+errno_t cjson_SafeWriteString(cJSON* object, const char* string_property, const char* string_val) {
 	
-	const cJSON* tmp = cJSON_CreateString(string_val);
+	cJSON* tmp = cJSON_CreateString(string_val);
 	if (tmp == NULL)
 		return ENOMEM;
 	if (!cJSON_AddItemToObject(object, string_property, tmp)) {
