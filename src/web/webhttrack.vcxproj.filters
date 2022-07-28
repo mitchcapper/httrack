@@ -15,34 +15,34 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="htsserver.c">
+    <ClCompile Include="../path-join/path-join.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="htsweb.c">
+    <ClCompile Include="../path-join/str-ends-with.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="path-join\path-join.c">
+    <ClCompile Include="../path-join/str-starts-with.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="path-join\str-ends-with.c">
+    <ClCompile Include="../htsserver.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="path-join\str-starts-with.c">
+    <ClCompile Include="../htsweb.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="htsserver.h">
-      <Filter>Resource Files</Filter>
+    <ClInclude Include="../htsserver.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="htsweb.h">
-      <Filter>Resource Files</Filter>
+    <ClInclude Include="../htsweb.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="ReadMe.txt" />
+    <Text Include="../ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Library Include="$(ZLibDir)lib\$(Platform)\$(Configuration)\$(ZLibName).lib" />
+    <None Include="packages.config" />
   </ItemGroup>
 </Project>
