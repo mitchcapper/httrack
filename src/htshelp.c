@@ -508,6 +508,7 @@ void help(const char *app, int more) {
   infomsg("");
   infomsg("Proxy options:");
   infomsg("  P  proxy use (-P proxy:port or -P user:pass@proxy:port)");
+  infomsg(" %C *use proxy for ssl (C0 don't use)");
   infomsg(" %f *use proxy for ftp (f0 don't use)");
   infomsg(" %b  use this local hostname to make/send requests (-%b hostname)");
   infomsg("");

@@ -1530,6 +1530,13 @@ static int hts_main_internal(int argc, char **argv, httrackp * opt) {
                   com++;
                 }
                 break;          // pas de compression
+			  case 'C':
+				  opt->https_proxy = 1;
+				  if (*(com + 1) == '0') {
+					  opt->https_proxy = 0;
+					  com++;
+				  }
+				  break;
               case 'f':
                 opt->ftp_proxy = 1;
                 if (*(com + 1) == '0') {
@@ -2669,6 +2676,7 @@ static int hts_main_internal(int argc, char **argv, httrackp * opt) {
               na++;
               opt->proxy.active = 1;
               // Rechercher MAIS en partant de la fin à cause de user:pass@proxy:port
+			  // trans: Search BUT starting from the end because of user:pass@proxy:port
               a = argv[na] + strlen(argv[na]) - 1;
               // a=strstr(argv[na],":");  // port
               while((a > argv[na]) && (*a != ':') && (*a != '@'))

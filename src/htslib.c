@@ -681,7 +681,7 @@ T_SOC http_xfopen(httrackp * opt, int mode, int treat, int waitconnect,
   if (retour) {
     if ((!(retour->req.proxy.active))
         || ((strcmp(adr, "file://") == 0)
-            || (strncmp(adr, "https://", 8) == 0)
+            || (strncmp(adr, "https://", 8) == 0 && ! opt->https_proxy)
         )
       ) {                       /* pas de proxy, ou non utilisable ici */
       soc = newhttp(opt, adr, retour, -1, waitconnect);
@@ -951,13 +951,14 @@ int http_sendhead(httrackp * opt, t_cookie * cookie, int mode,
     }
 
     // si on gère un proxy, il faut une Absolute URI: on ajoute avant http://www.adr.dom
-    if (retour->req.proxy.active && (strncmp(adr, "https://", 8) != 0)) {
+	BOOL is_https = strncmp(adr, "https://", 8) == 0;
+    if (retour->req.proxy.active && (! is_https || opt->https_proxy)) {
       if (!link_has_authority(adr)) {   // default http
 #if HDEBUG
         printf("Proxy Use: for %s%s proxy %d port %d\n", adr, fil,
                retour->req.proxy.name, retour->req.proxy.port);
 #endif
-        print_buffer(&bstr, "http://%s", jump_identification_const(adr));
+        print_buffer(&bstr, is_https ? "https://%s" : "http://%s", jump_identification_const(adr));
       } else {                  // ftp:// en proxy http
 #if HDEBUG
         printf("Proxy Use for ftp: for %s%s proxy %d port %d\n", adr, fil,
@@ -2018,6 +2019,12 @@ LLint http_xfread1(htsblk * r, int bufl) {
 // en cas de moved xx, dans location
 // abandonne désormais au bout de 30 secondes (aurevoir les sites
 // qui nous font poireauter 5 heures..) -> -2=timeout
+//trans:
+// test if a URL (validity, header, size)
+// returns 200 or the error code (404=NOT FOUND, etc)
+// in case of moved xx, in location
+// now give up after 30 seconds (goodbye sites
+// which make us hang around for 5 hours..) -> -2=timeout
 htsblk http_test(httrackp * opt, const char *adr, const char *fil, char *loc) {
   T_SOC soc;
   htsblk retour;
@@ -2123,6 +2130,9 @@ htsblk http_test(httrackp * opt, const char *adr, const char *fil, char *loc) {
 // Crée un lien (http) vers une adresse internet iadr
 // retour: structure (adresse, taille, message si erreur (si !adr))
 // peut ouvrir avec des connect() non bloquants: waitconnect=0/1
+// trans: Create a link (http) to an iadr internet address
+// return: structure (address, size, message if error (if !adr))
+// can open with non-blocking connect(): waitconnect=0/1
 T_SOC newhttp(httrackp * opt, const char *_iadr, htsblk * retour, int port,
               int waitconnect) {
   T_SOC soc;                    // descipteur de la socket
@@ -5513,6 +5523,7 @@ HTSEXT_API httrackp *hts_create_opt(void) {
   opt->urlhack = 1;             // url hack (normalizer)
   StringCopy(opt->footer, HTS_DEFAULT_FOOTER);
   opt->ftp_proxy = 1;           // proxy http pour ftp
+  opt->https_proxy = 0;         // proxy http pour https
   opt->convert_utf8 = 1;        // convert html to UTF-8
   StringCopy(opt->filelist, "");
   StringCopy(opt->lang_iso, "en, *");
