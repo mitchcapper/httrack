@@ -885,7 +885,13 @@ int http_sendhead(httrackp* opt, t_cookie* cookie, int mode,
 	const char* xsend, const char* adr, const char* fil,
 	const char* referer_adr, const char* referer_fil,
 	htsblk* retour) {
-	char BIGSTK buffer_head_request[8192];
+#if HTS_HEADER_LINE_MAX_SIZE*4 < TARGET_STACK_SIZE /2 //mind our stacks need to keep small to avoid an overflow but if we have a huge stack lets not exceed max line lengthx4
+	char BIGSTK buffer_head_request[HTS_HEADER_LINE_MAX_SIZE * 4];
+#else
+	char BIGSTK buffer_head_request[TARGET_STACK_SIZE / 2];
+#endif // HTS_HEADER_LINE_MAX_SIZE*4 < TARGET_STACK_SIZE
+
+	
 	buff_struct bstr = { buffer_head_request, sizeof(buffer_head_request), 0 };
 
 	//int use_11=0;     // HTTP 1.1 utilisé
