@@ -1051,7 +1051,7 @@ int http_sendhead(httrackp * opt, t_cookie * cookie, int mode,
       char buffer[8192];
       char *b = cookie->data;
       int cook = 0;
-      int max_cookies = 8;
+      int max_cookies = COOKIE_MAX;
 
       do {
         b = cookie_find(b, "", jump_identification_const(adr), fil);  // prochain cookie satisfaisant aux conditions
@@ -1067,7 +1067,7 @@ int http_sendhead(httrackp * opt, t_cookie * cookie, int mode,
           print_buffer(&bstr, "; $Path=%s", cookie_get(buffer, b, COOK_PARAM_PATH));
           b = cookie_nextfield(b);
         }
-      } while(b != NULL && max_cookies > 0);
+      } while(b != NULL && b[0] != '\0' && max_cookies > 0);
       if (cook) {               // on a envoyé un (ou plusieurs) cookie?
         print_buffer(&bstr, H_CRLF);
 #if DEBUG_COOK
