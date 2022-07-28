@@ -1146,7 +1146,7 @@ static int hts_main_internal(int argc, char **argv, httrackp * opt) {
             httrack_logmode = 1;        // erreurs à l'écran
             opt->savename_type = 1003;  // mettre dans le répertoire courant
             opt->depth = 0;     // ne pas explorer la page
-            opt->accept_cookie = 0;     // pas de cookies
+            opt->accept_cookie = 0;     // 1 for cookies.txt 2 for cookies.json
             opt->robots = 0;    // pas de robots
             break;
           case 'w':

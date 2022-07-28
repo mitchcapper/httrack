@@ -142,6 +142,7 @@
       <PreprocessorDefinitions>_DEBUG;WIN32;_WINDOWS;_USRDLL;LIBHTTRACK_EXPORTS;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
+      <SupportJustMyCode>true</SupportJustMyCode>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -149,6 +150,7 @@
     <Link>
       <AdditionalDependencies>Ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <GenerateMapFile>true</GenerateMapFile>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
       <MapExports>true</MapExports>
     </Link>
   </ItemDefinitionGroup>
@@ -158,6 +160,11 @@
       <PreprocessorDefinitions>_DEBUG;WIN32;_WINDOWS;_USRDLL;LIBHTTRACK_EXPORTS;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
+      <SupportJustMyCode>true</SupportJustMyCode>
+      <TreatSpecificWarningsAsErrors>4013;%(TreatSpecificWarningsAsErrors)</TreatSpecificWarningsAsErrors>
+      <Optimization>Disabled</Optimization>
+      <ControlFlowGuard>Guard</ControlFlowGuard>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -165,10 +172,18 @@
     <Link>
       <AdditionalDependencies>Ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <GenerateMapFile>true</GenerateMapFile>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
       <MapExports>true</MapExports>
+      <AssemblyDebug>true</AssemblyDebug>
+      <StackReserveSize>
+      </StackReserveSize>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="cJSON\cJSON.c" />
+    <ClCompile Include="path-join\path-join.c" />
+    <ClCompile Include="path-join\str-ends-with.c" />
+    <ClCompile Include="path-join\str-starts-with.c" />
     <ClCompile Include="coucal\coucal.c" />
     <ClCompile Include="htsalias.c" />
     <ClCompile Include="htsback.c" />
@@ -206,6 +221,10 @@
     <ClCompile Include="punycode.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="cJSON\cJSON.h" />
+    <ClInclude Include="path-join\path-join.h" />
+    <ClInclude Include="path-join\str-ends-with.h" />
+    <ClInclude Include="path-join\str-starts-with.h" />
     <ClInclude Include="coucal\coucal.h" />
     <ClInclude Include="hts-indextmpl.h" />
     <ClInclude Include="htsalias.h" />
