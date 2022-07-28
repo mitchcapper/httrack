@@ -35,6 +35,7 @@ static long int  timezone = 0;
 #endif
 
 /* Locking */
+#define WIN32_LEAN_AND_MEAN
 #ifdef _WIN32
 #include <process.h>            /* _beginthread, _endthread */
 #else
