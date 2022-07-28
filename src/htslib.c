@@ -5529,7 +5529,7 @@ HTSEXT_API httrackp* hts_create_opt(void) {
 	opt->proxy.active = 0;        // pas de proxy
 	opt->user_agent_send = 1;     // envoyer un user-agent
 	StringCopy(opt->user_agent,
-		"Mozilla/4.5 (compatible; HTTrack 3.0x; Windows 98)");
+		"Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:199.0) Gecko/20100101");
 	StringCopy(opt->referer, "");
 	StringCopy(opt->from, "");
 	opt->savename_83 = 0;         // noms longs par défaut

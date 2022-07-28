@@ -21,13 +21,13 @@
     <ClCompile Include="htsweb.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\software\httrack-windows\httrack\src\path-join\path-join.c">
+    <ClCompile Include="path-join\path-join.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\software\httrack-windows\httrack\src\path-join\str-ends-with.c">
+    <ClCompile Include="path-join\str-ends-with.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\software\httrack-windows\httrack\src\path-join\str-starts-with.c">
+    <ClCompile Include="path-join\str-starts-with.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

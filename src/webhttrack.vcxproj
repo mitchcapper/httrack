@@ -182,9 +182,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="C:\software\httrack-windows\httrack\src\path-join\path-join.c" />
-    <ClCompile Include="C:\software\httrack-windows\httrack\src\path-join\str-ends-with.c" />
-    <ClCompile Include="C:\software\httrack-windows\httrack\src\path-join\str-starts-with.c" />
+    <ClCompile Include="path-join\path-join.c" />
+    <ClCompile Include="path-join\str-ends-with.c" />
+    <ClCompile Include="path-join\str-starts-with.c" />
     <ClCompile Include="htsserver.c" />
     <ClCompile Include="htsweb.c" />
   </ItemGroup>
