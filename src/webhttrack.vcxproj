@@ -144,6 +144,7 @@
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
       <SupportJustMyCode>true</SupportJustMyCode>
+		<TreatSpecificWarningsAsErrors>4013;%(TreatSpecificWarningsAsErrors)</TreatSpecificWarningsAsErrors>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -163,6 +164,7 @@
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
       <SupportJustMyCode>true</SupportJustMyCode>
+		<TreatSpecificWarningsAsErrors>4013;%(TreatSpecificWarningsAsErrors)</TreatSpecificWarningsAsErrors>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -183,9 +185,6 @@
     <ClCompile Include="htsweb.c" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="C:\software\httrack-windows\httrack\src\path-join\path-join.h" />
-    <ClInclude Include="C:\software\httrack-windows\httrack\src\path-join\str-ends-with.h" />
-    <ClInclude Include="C:\software\httrack-windows\httrack\src\path-join\str-starts-with.h" />
     <ClInclude Include="htsserver.h" />
     <ClInclude Include="htsweb.h" />
   </ItemGroup>

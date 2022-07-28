@@ -1,3 +1,6 @@
 [submodule "src/coucal"]
 	path = src/coucal
 	url = https://github.com/xroche/coucal.git
+[submodule "src/cJSON"]
+	path = src/cJSON
+	url = https://github.com/DaveGamble/cJSON.git

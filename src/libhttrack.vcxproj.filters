@@ -120,6 +120,18 @@
     <ClCompile Include="minizip\zip.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="path-join\path-join.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="path-join\str-ends-with.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="path-join\str-starts-with.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cJSON\cJSON.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="mmsrip\common.h">
@@ -254,11 +266,26 @@
     <ClInclude Include="minizip\zip.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="path-join\path-join.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="path-join\str-ends-with.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="path-join\str-starts-with.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cJSON\cJSON.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="changelog.txt" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="$(ZLibDir)lib\$(Platform)\$(Configuration)\$(ZLibName).lib" />
   </ItemGroup>
 </Project>

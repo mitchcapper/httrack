@@ -147,7 +147,7 @@ RUN_CALLBACK0(opt, end); \
   if (opt->log != NULL) fflush(opt->log); \
   if (makestat_fp) { fclose(makestat_fp); makestat_fp=NULL; } \
   if (maketrack_fp){ fclose(maketrack_fp); maketrack_fp=NULL; } \
-  if (opt->accept_cookie) cookie_save(opt->cookie,fconcat(OPT_GET_BUFF(opt),OPT_GET_BUFF_SIZE(opt),StringBuff(opt->path_log),"cookies.txt")); \
+  if (opt->accept_cookie) cookie_save(opt->cookie,fconcat(OPT_GET_BUFF(opt),OPT_GET_BUFF_SIZE(opt),StringBuff(opt->path_log),opt->accept_cookie == 1 ? "cookies.txt" : "cookies.json")); \
   if (makeindex_fp) { fclose(makeindex_fp); makeindex_fp=NULL; } \
   if (cache_hashtable) { coucal_delete(&cache_hashtable); } \
   if (cache_tests)     { coucal_delete(&cache_tests); } \
@@ -521,11 +521,12 @@ int httpmirror(char *url1, httrackp * opt) {
   // initialiser cookie
   if (opt->accept_cookie) {
     opt->cookie = &cookie;
-    cookie.max_len = 30000;     // max len
+    cookie.max_len = sizeof(cookie.data);     // max len
     strcpybuff(cookie.data, "");
     // Charger cookies.txt par défaut ou cookies.txt du miroir
-    cookie_load(opt->cookie, StringBuff(opt->path_log), "cookies.txt");
-    cookie_load(opt->cookie, "", "cookies.txt");
+	char* cookieFName = opt->cookie == 1 ? "cookies.txt" : "cookies.json";
+    cookie_load(opt->cookie, StringBuff(opt->path_log), cookieFName);
+    cookie_load(opt->cookie, "", cookieFName);
   } else
     opt->cookie = NULL;
 

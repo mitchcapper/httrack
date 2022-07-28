@@ -41,6 +41,7 @@ Please visit our Website: http://www.httrack.com
 #define HTS_DEF_FWSTRUCT_bauth_chain
 typedef struct bauth_chain bauth_chain;
 #endif
+
 struct bauth_chain {
   char prefix[1024];            /* www.foo.com/secure/ */
   char auth[1024];              /* base-64 encoded user:pass */
@@ -51,25 +52,47 @@ struct bauth_chain {
 #ifndef HTS_DEF_FWSTRUCT_t_cookie
 #define HTS_DEF_FWSTRUCT_t_cookie
 typedef struct t_cookie t_cookie;
+
+
 #endif
+#define COOKIE_PARAM_BUFFER_SIZE 1024
+#define COOKIE_VALUE_BUFFER_SIZE 4096 //RFC requirements are technically 4096 total for the entire cookie minimum when adding all 4 together
+#define COOKIE_MAX 100 //RFC technically says 3000 max 50 per domain but this ist stack alloced so higher requiures building with larger stack ie /STACK:16777216
+#define COOKIE_SINGLE_MAX_SIZE sizeof(t_cookie_expanded)
+struct t_cookie_expanded {
+	char cook_name[COOKIE_PARAM_BUFFER_SIZE];
+	char cook_value[COOKIE_VALUE_BUFFER_SIZE];
+	char domain[COOKIE_PARAM_BUFFER_SIZE];
+	char path[COOKIE_PARAM_BUFFER_SIZE];
+};
+typedef struct t_cookie_expanded t_cookie_expanded;
+
+static const struct t_cookie_expanded EmptyExpandedCookieStruct;//a zero struct
+
+
 struct t_cookie {
   int max_len;
-  char data[32768];
+  char data[COOKIE_MAX * COOKIE_SINGLE_MAX_SIZE];
   bauth_chain auth;
 };
 
+
+
 /* Library internal definictions */
 #ifdef HTS_INTERNAL_BYTECODE
-
+typedef enum { COOK_PARAM_PATH = 2, COOK_PARAM_NAME = 5, COOK_PARAM_DOMAIN = 0, COOK_PARAM_VALUE = 6 } COOK_PARAM_t;
 // cookies
+int cookie_addE(t_cookie* cookie, t_cookie_expanded* cookie_expanded);
 int cookie_add(t_cookie * cookie, const  char *cook_name, const  char *cook_value,
                const  char *domain, const  char *path);
 int cookie_del(t_cookie * cookie, const char *cook_name, const char *domain, const char *path);
+
 int cookie_load(t_cookie * cookie, const char *path, const char *name);
 int cookie_save(t_cookie * cookie, const char *name);
 void cookie_insert(char *s, const char *ins);
 void cookie_delete(char *s, size_t pos);
-const char *cookie_get(char *buffer, const char *cookie_base, int param);
+const char *cookie_get(char *buffer, const char *cookie_base, COOK_PARAM_t param);
+t_cookie_expanded cookie_getE(const char* cookie_base);
 char *cookie_find(char *s, const char *cook_name, const char *domain, const char *path);
 char *cookie_nextfield(char *a);
 
