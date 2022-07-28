@@ -48,7 +48,7 @@ Please visit our Website: http://www.httrack.com
 
 void DEBUG_COOK_PRINT_EXPANDED(const char* context, t_cookie_expanded* cookie_expanded);
 errno_t cjson_SafeReadString(const cJSON* object, const char* string_property, char* buffer, size_t buffer_size);
-errno_t cjson_SafeWriteString(const cJSON* object, const char* string_property, const char* string_val);
+errno_t cjson_SafeWriteString(cJSON* object, const char* string_property, const char* string_val);
 int save_json_cookies_to_file(FILE* fp, t_cookie* cookie);
 errno_t _save_cookie_json(FILE* fp, t_cookie* cookie);
 int parse_json_cookies_from_file(FILE* fp, t_cookie* cookie);
