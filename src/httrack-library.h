@@ -234,6 +234,29 @@ HTSEXT_API char *escape_check_url_addr(const char *const src, char *const dest, 
 HTSEXT_API size_t make_content_id(const char *const adr, const char *const fil, char *const dest, const size_t size);
 
 HTSEXT_API size_t x_escape_http(const char *const s, char *const dest, const size_t max_size, const int mode);
+typedef enum {
+	ENCODE_PARAMS_SPACE = 1 << 0,//former option 2
+	ENCODE_PARAMS_DBL_QUOTES = 1 << 1,
+	ENCODE_PARAMS_SPECIAL_UTF = 1 << 2,
+	ENCODE_PARAMS_MARK = 1 << 3,
+	ENCODE_PARAMS_DELIM = 1 << 4,
+	ENCODE_PARAMS_RESERVED = 1 << 5,
+	ENCODE_PARAMS_XXAVOID = 1 << 6,
+	ENCODE_PARAMS_UNWISE = 1 << 7,
+	ENCODE_PARAMS_NOT_SLASH = 1 << 8,
+	ENCODE_PARAMS_NOT_PLUS = 1 << 9,
+	ENCODE_PARAMS_AMPERSAND = 1 << 10,
+	ENCODE_PARAMS_AS_HTML_ENTITIES = 1 << 11,///this only changes the method of escape you must still use flags as to what to escape
+	ENCODE_PARAMS_HIGH = 1 << 12,
+	ENCODE_PARAMS_COOKIE = 1 << 13,
+	ENCODE_PARAMS_SPACE_QUOTE_SPECIAL = ENCODE_PARAMS_SPACE | ENCODE_PARAMS_SPECIAL_UTF | ENCODE_PARAMS_DBL_QUOTES, /// formerly mode 0
+	ENCODE_PARAMS_URL_ENCODING = ENCODE_PARAMS_RESERVED | ENCODE_PARAMS_DELIM | ENCODE_PARAMS_UNWISE | ENCODE_PARAMS_SPECIAL_UTF | ENCODE_PARAMS_XXAVOID | ENCODE_PARAMS_MARK,///former option 1
+	ENCODE_PARAMS_URI_COMPONENT = ENCODE_PARAMS_SPECIAL_UTF | ENCODE_PARAMS_XXAVOID, ///former option 3
+	ENCODE_PARAMS_URI_COMPONENT_UTF = ENCODE_PARAMS_RESERVED | ENCODE_PARAMS_DELIM | ENCODE_PARAMS_UNWISE | ENCODE_PARAMS_SPECIAL_UTF | ENCODE_PARAMS_XXAVOID | ENCODE_PARAMS_NOT_SLASH
+
+} ENCODE_PARAMS_t;
+/* Returns the number of characters written (not taking in account the terminating \0), or 'size' upon overflow. */
+HTSEXT_API size_t x_escape_flags(const char* const s, char* const dest, const size_t size, ENCODE_PARAMS_t flags);
 HTSEXT_API void escape_remove_control(char *const s);
 HTSEXT_API size_t escape_for_html_print(const char *const s, char *const dest, const size_t size);
 HTSEXT_API size_t escape_for_html_print_full(const char *const s, char *const dest, const size_t size);
