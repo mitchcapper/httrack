@@ -370,6 +370,7 @@ struct httrackp {
   int maxcache;                 // maximum en mémoire au niveau du cache (backing)
   //int maxcache_anticipate; // maximum de liens à anticiper (majorant)
   int ftp_proxy;                // proxy http pour ftp
+  int https_proxy;                // proxy http pour https
   String filelist;              // fichier liste URL à inclure
   String urllist;               // fichier liste de filtres à inclure
   htsfilters filters;           // contient les pointeurs pour les filtres

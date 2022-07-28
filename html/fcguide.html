@@ -204,6 +204,7 @@ Action options:
 Proxy options:
   P  proxy use (-P proxy:port or -P user:pass@proxy:port) (--proxy <param>)
  %f *use proxy for ftp (f0 don't use) (--httpproxy-ftp[=N])
+ %C *use proxy for ssl (C0 don't use) (--httpproxy-ssl[=N])
 
 Limits options:
   rN set the mirror depth to N (* r9999) (--depth[=N])
@@ -407,6 +408,7 @@ site. Specifically, the defauls are:
 <pre>
   w *mirror web sites
  %f *use proxy for ftp (f0 don't use)
+ %C *use proxy for ssl (C0 don't use)
   cN number of multiple connections (*c8)
   RN number of retries, in case of timeout or non-fatal errors (*R1)
  %P *extended parsing, attempt to parse all links, even in unknown tags or Javascript (%P0 don't use)
@@ -441,6 +443,11 @@ for links to other URLs inside it, dowloading them as well.
 <p align=justify> If there are and links to ftp URLs (URLs using the
 file transfer protocol (FTP) rather than the hypertext transfer protocol
 HTTP), go through an ftp proxy server to get them.
+
+<pre><b><i> %C *use proxy for ssl (C0 don't use) </i></b></pre>
+
+<p align=justify> If there are and links to ssl URLs (URLs using HTTPS rather than the hypertext transfer protocol
+HTTP), go through the proxy server to get them.
 
 <pre><b><i>  cN number of multiple connections (*c8) </i></b></pre>
 
@@ -678,7 +685,9 @@ a remote server.
 <pre><b><i>Proxy options:
   P  proxy use (-P proxy:port or -P user:pass@proxy:port)
  %f *use proxy for ftp (f0 don't use)
+ %C *use proxy for ssl (C0 don't use)
 </i></b></pre>
+
 
 <p align=justify> If you are using a standard proxy that doesn't require
 a user ID and password, you would do something like this:

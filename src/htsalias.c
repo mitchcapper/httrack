@@ -85,6 +85,7 @@ const char *hts_optalias[][4] = {
   {"proxy", "-P", "param1", "proxy name:port"},
   {"bind", "-%b", "param1", "hostname to bind"},
   {"httpproxy-ftp", "-%f", "param", ""},
+  {"httpproxy-ssl", "-%C", "param", ""},
   {"depth", "-r", "param", ""}, {"recurse-levels", "-r", "param", ""},
   {"ext-depth", "-%e", "param", ""},
   {"max-files", "-m", "param", ""},

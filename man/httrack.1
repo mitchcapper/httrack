@@ -22,6 +22,8 @@ httrack \- offline browser : copy websites to a local directory
 ] [ 
 .B \-%f, \-\-httpproxy\-ftp[=N] 
 ] [ 
+.B \-%C, \-\-httpproxy\-ssl[=N] 
+] [ 
 .B \-%b, \-\-bind 
 ] [ 
 .B \-rN, \-\-depth[=N] 
@@ -230,6 +232,8 @@ mirror ALL links located in the first level pages (mirror links) (\-\-mirrorlink
 proxy use (\-P proxy:port or \-P user:pass@proxy:port) (\-\-proxy <param>)
 .IP \-%f
 *use proxy for ftp (f0 don t use) (\-\-httpproxy\-ftp[=N])
+.IP \-%C
+*use proxy for ssl (C0 don t use) (\-\-httpproxy\-ssl[=N])
 .IP \-%b
 use this local hostname to make/send requests (\-%b hostname) (\-\-bind <param>)
 

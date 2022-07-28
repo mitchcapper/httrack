@@ -1955,7 +1955,7 @@ int back_add(struct_back * sback, httrackp * opt, cache_back * cache, const char
         }
       }
 #if HTS_USEOPENSSL
-      else if (strfield(back[p].url_adr, "https://")) {     // let's rock
+      else if (strfield(back[p].url_adr, "https://") && ! opt->https_proxy) {     // let's rock
         back[p].r.ssl = 1;
         // back[p].r.ssl_soc = NULL;
         back[p].r.ssl_con = NULL;
