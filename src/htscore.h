@@ -50,7 +50,7 @@ Please visit our Website: http://www.httrack.com
 #endif
 #endif
 /* END specific definitions */
-
+#define TARGET_STACK_SIZE 4 * 1024 * 1024 //4MB, for windows we set this at compile time so if changing be sure to update the proj files win has 1MB by default linux generally at least 8MB
 /* Forward definitions */
 #ifndef HTS_DEF_FWSTRUCT_lien_url
 #define HTS_DEF_FWSTRUCT_lien_url
