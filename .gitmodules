@@ -1,6 +1,12 @@
-[submodule "src/coucal"]
-	path = src/coucal
+[submodule "src/vendor/coucal"]
+	path = src/vendor/coucal
 	url = https://github.com/xroche/coucal.git
-[submodule "src/cJSON"]
-	path = src/cJSON
+	ignore = untracked
+[submodule "src/vendor/cJSON"]
+	path = src/vendor/cJSON
 	url = https://github.com/DaveGamble/cJSON.git
+	ignore = untracked
+[submodule "src/vendor/safeclib"]
+	path = src/vendor/safeclib
+	url = https://github.com/rurban/safeclib.git
+	ignore = untracked

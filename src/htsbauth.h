@@ -41,7 +41,6 @@ Please visit our Website: http://www.httrack.com
 #define HTS_DEF_FWSTRUCT_bauth_chain
 typedef struct bauth_chain bauth_chain;
 #endif
-
 struct bauth_chain {
   char prefix[1024];            /* www.foo.com/secure/ */
   char auth[1024];              /* base-64 encoded user:pass */

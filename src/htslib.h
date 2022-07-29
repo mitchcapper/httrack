@@ -200,14 +200,14 @@ void treatfirstline(htsblk * retour, const char *rcvd);
 // sous-fonctions
 LLint http_xfread1(htsblk * r, int bufl);
 HTS_INLINE SOCaddr* hts_dns_resolve2(httrackp * opt, const char *iadr,
-                                     SOCaddr *const addr, 
+                                     SOCaddr *const addr,
                                      const char **error);
 HTS_INLINE SOCaddr* hts_dns_resolve(httrackp * opt, const char *iadr,
                                     SOCaddr *const addr);
-HTSEXT_API SOCaddr* hts_dns_resolve_nocache2(const char *const hostname, 
+HTSEXT_API SOCaddr* hts_dns_resolve_nocache2(const char *const hostname,
                                               SOCaddr *const addr,
                                               const char **error);
-HTSEXT_API SOCaddr* hts_dns_resolve_nocache(const char *const hostname, 
+HTSEXT_API SOCaddr* hts_dns_resolve_nocache(const char *const hostname,
                                              SOCaddr *const addr);
 HTSEXT_API int check_hostname_dns(const char *const hostname);
 
@@ -453,12 +453,6 @@ HTS_STATIC int strcmpnocase(const char *a, const char *b) {
   }
   return 0;
 }
-
-#ifdef _WIN32
-#define strcasecmp(a,b) _stricmp(a,b)
-#define strncasecmp(a,b,n) _strnicmp(a,b,n)
-#define snprintf _snprintf
-#endif
 
 #define strfield2(f,s) ( (strlen(f)!=strlen(s)) ? 0 : (strfield(f,s)) )
 

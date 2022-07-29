@@ -15,13 +15,13 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="../path-join/path-join.c">
+    <ClCompile Include="../vendor/path-join/path-join.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="../path-join/str-ends-with.c">
+    <ClCompile Include="../vendor/path-join/str-ends-with.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="../path-join/str-starts-with.c">
+    <ClCompile Include="../vendor/path-join/str-starts-with.c">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="../htsserver.c">

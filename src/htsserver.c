@@ -53,6 +53,7 @@ Please visit our Website: http://www.httrack.com
 #ifndef _WIN32
 #include <signal.h>
 #endif
+#include "PlatformFixes.h"
 /* END specific definitions */
 
 /* définitions globales */
@@ -81,7 +82,7 @@ coucal NewLangList = NULL;
 /* Language files */
 
 #include "htsserver.h"
-#include "WinPosixFixes.h"
+#include "PlatformFixes.h"
 const char *gethomedir(void);
 int commandRunning = 0;
 int commandEndRequested = 0;

@@ -43,7 +43,7 @@ Please visit our Website: http://www.httrack.com
 #include <time.h>
 
 #include "htszlib.h"
-#include "WinPosixFixes.h"
+#include "PlatformFixes.h"
 /* END specific definitions */
 
 // routines de mise en cache

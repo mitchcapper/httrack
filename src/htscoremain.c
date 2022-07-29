@@ -63,7 +63,7 @@ Please visit our Website: http://www.httrack.com
 #endif
 #endif
 #endif
-#include "WinPosixFixes.h"
+#include "PlatformFixes.h"
 /* Resolver */
 extern int IPV6_resolver;
 

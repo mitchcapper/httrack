@@ -42,6 +42,7 @@ Please visit our Website: http://www.httrack.com
 #include "htscharset.h"
 #include "htsencoding.h"
 #include <ctype.h>
+#include "PlatformFixes.h"
 
 #define ADD_STANDARD_PATH \
     {  /* ajout nom */\

@@ -59,7 +59,7 @@ Please visit our Website: http://www.httrack.com
 #endif
 #else
 #endif
-#include "WinPosixFixes.h"
+#include "PlatformFixes.h"
 #define VT_CLREOL       "\33[K"
 
 /* Slot operations */

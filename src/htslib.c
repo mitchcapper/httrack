@@ -83,10 +83,7 @@ Please visit our Website: http://www.httrack.com
 #endif /* _WIN32 */
 
 #include <sys/stat.h>
-#include "WinPosixFixes.h"
-#ifdef __ANDROID__
-#define timezone 0
-#endif
+#include "PlatformFixes.h"
 /* END specific definitions */
 
 /* Windows might be missing va_copy */
@@ -891,7 +888,7 @@ int http_sendhead(httrackp* opt, t_cookie* cookie, int mode,
 	char BIGSTK buffer_head_request[TARGET_STACK_SIZE / 2];
 #endif // HTS_HEADER_LINE_MAX_SIZE*4 < TARGET_STACK_SIZE
 
-	
+
 	buff_struct bstr = { buffer_head_request, sizeof(buffer_head_request), 0 };
 
 	//int use_11=0;     // HTTP 1.1 utilisé
@@ -2121,7 +2118,7 @@ htsblk http_test(httrackp* opt, const char* adr, const char* fil, char* loc) {
 						treathead(NULL, NULL, NULL, &retour, rcvd); // traiter
 
 				} while (strnotempty(rcvd));
-				// ----------------------------------------                    
+				// ----------------------------------------
 
 				// libérer mémoire
 				if (retour.adr != NULL) {
@@ -2809,40 +2806,7 @@ struct tm* convert_time_rfc822(struct tm* result, const char* s) {
 	}
 	return NULL;
 }
-static int timezone = -9999;
-int time_offset()//https://stackoverflow.com/questions/13804095/get-the-time-zone-gmt-offset-in-c
-{
-	time_t gmt, rawtime = time(NULL);
-	struct tm* ptm;
 
-#if !defined(WIN32)
-	struct tm gbuf;
-	ptm = gmtime_r(&rawtime, &gbuf);
-#else
-	ptm = gmtime(&rawtime);
-#endif
-	// Request that mktime() looksup dst in timezone database
-	ptm->tm_isdst = -1;
-	gmt = mktime(ptm);
-
-	return (int)difftime(rawtime, gmt);
-}
-static time_t getGMT(struct tm* tm) {   /* hey, time_t is local! */
-	time_t t = mktime(tm);
-
-	if (t != (time_t)-1 && t != (time_t)0) {
-		/* BSD does not have static "timezone" declared */
-#if (defined(BSD) || defined(__FreeBSD__) || defined(__OpenBSD__) || defined(__NetBSD__) || defined(__FreeBSD_kernel__))
-		time_t now = time(NULL);
-		time_t timezone = -localtime(&now)->;
-#elif _WIN32
-		if (timezone == -9999)
-			timezone = time_offset();
-#endif
-		return (time_t)(t - timezone);
-	}
-	return (time_t)-1;
-}
 
 /* sets file time. -1 if error */
 /* Note: utf-8 */
@@ -3222,7 +3186,10 @@ typedef struct {
 	unsigned int pos;
 	unsigned char data[4];
 } t_auto_seq;
-
+#ifndef _WIN32
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wtype-limits"
+#endif
 // char between a and b
 #define CHAR_BETWEEN(c, a, b)       ( (c) >= 0x##a ) && ( (c) <= 0x##b )
 // sequence start
@@ -3302,7 +3269,9 @@ int is_unicode_utf8(const char* buffer_, const size_t size) {
 
 	return is_utf;
 }
-
+#ifndef _WIN32
+#pragma GCC diagnostic pop
+#endif
 void map_characters(unsigned char* buffer, unsigned int size, unsigned int* map) {
 	unsigned int i;
 
@@ -3435,7 +3404,7 @@ char *FUN(char *source) { \
   return ret != NULL ? source + ( ret - source ) : NULL; \
 }
 
-// retourne le pointeur ou le pointeur + offset si il existe dans la chaine un @ signifiant 
+// retourne le pointeur ou le pointeur + offset si il existe dans la chaine un @ signifiant
 // une identification
 HTSEXT_API const char* jump_identification_const(const char* source) {
 	const char* a, * trytofind;
@@ -3949,7 +3918,7 @@ HTSEXT_API size_t x_escape_flags(const char* const s, char* const dest, const si
 				ADD_CHAR('x');
 			} else
 				ADD_CHAR('%');
-			if (c != '&' || (!flags & ENCODE_PARAMS_AS_HTML_ENTITIES)) {
+			if (c != '&' || (flags & ENCODE_PARAMS_AS_HTML_ENTITIES) == FALSE) {
 				ADD_CHAR(hex[c / 16]);
 				ADD_CHAR(hex[c % 16]);
 			} else {
@@ -4560,7 +4529,7 @@ int HTS_TOTAL_RECV_CHECK(int var) {
 #endif
 
 // Lecture dans buff de size octets au maximum en utilisant la socket r (structure htsblk)
-// returns: 
+// returns:
 // >0 : data received
 // == 0 : not yet data
 // <0: error or no data: READ_ERROR, READ_EOF or READ_TIMEOUT
@@ -5502,11 +5471,11 @@ HTSEXT_API httrackp* hts_create_opt(void) {
 
 	opt->wizard = 2;              // wizard automatique
 	opt->quiet = 0;               // questions
-	//  
+	//
 	opt->travel = 0;              // même adresse
 	opt->depth = 9999;            // mirror total par défaut
 	opt->extdepth = 0;            // mais pas à l'extérieur
-	opt->seeker = 1;              // down 
+	opt->seeker = 1;              // down
 	opt->urlmode = 2;             // relatif par défaut
 	opt->no_type_change = 0;      // change file types
 	opt->debug = LOG_NOTICE;      // small log

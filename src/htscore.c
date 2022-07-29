@@ -64,7 +64,7 @@ Please visit our Website: http://www.httrack.com
 /* Dynamic typed arrays */
 #include "htsarrays.h"
 
-#include "WinPosixFixes.h"
+#include "PlatformFixes.h"
 /* END specific definitions */
 
 /* external modules */
@@ -525,7 +525,7 @@ int httpmirror(char *url1, httrackp * opt) {
     cookie.max_len = sizeof(cookie.data);     // max len
     strcpybuff(cookie.data, "");
     // Charger cookies.txt par défaut ou cookies.txt du miroir
-	char* cookieFName = opt->accept_cookie == 1 ? "cookies.txt" : "cookies.json";
+	const char* cookieFName = opt->accept_cookie == 1 ? "cookies.txt" : "cookies.json";
     cookie_load(opt->cookie, StringBuff(opt->path_log), cookieFName);
     cookie_load(opt->cookie, "", cookieFName);
   } else

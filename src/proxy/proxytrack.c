@@ -135,7 +135,7 @@ Remark: If no cache newer than the added one is found, all entries can be added 
 #include "proxytrack.h"
 
 /* Store manager */
-#include "../minizip/mztools.h"
+#include "../vendor/minizip/mztools.h"
 #include "store.h"
 
 /* threads */
@@ -144,7 +144,7 @@ Remark: If no cache newer than the added one is found, all entries can be added 
 #else
 #include <pthread.h>
 #endif
-
+#include "PlatformFixes.h"
 /* External references */
 void abortLog__fnc(char *msg, char *file, int line);
 void abortLog__fnc(char *msg, char *file, int line) {

@@ -40,6 +40,7 @@ Please visit our Website: http://www.httrack.com
 /* specific definitions */
 #include "htsbase.h"
 #include <ctype.h>
+#include "PlatformFixes.h"
 /* END specific definitions */
 
 // libérer filters[0] pour insérer un élément dans filters[0]

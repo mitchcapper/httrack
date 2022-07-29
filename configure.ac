@@ -30,7 +30,7 @@ Please visit our Website: http://www.httrack.com
 AC_CONFIG_SRCDIR(src/httrack.c)
 AC_CONFIG_MACRO_DIR([m4])
 AC_CONFIG_HEADERS(config.h)
-AM_INIT_AUTOMAKE([subdir-objects])
+AM_INIT_AUTOMAKE([foreign subdir-objects])
 VERSION_INFO="2:49:0"
 AM_MAINTAINER_MODE
 AC_USE_SYSTEM_EXTENSIONS
@@ -55,9 +55,11 @@ AC_SUBST(VERSION_INFO)
 DEFAULT_CFLAGS="-Wall -Wformat -Wformat-security \
 -Wmultichar -Wwrite-strings -Wcast-qual -Wcast-align \
 -Wstrict-prototypes -Wmissing-prototypes \
--Wmissing-declarations -Wdeclaration-after-statement \
+-Wmissing-declarations \
 -Wpointer-arith -Wsequence-point -Wnested-externs \
--Wtype-limits \
+-Wtype-limits -Werror-implicit-function-declaration \
+-Wno-format-overflow \
+-Wno-format-truncation -Wno-stringop-truncation \
 -D_REENTRANT"
 AC_SUBST(DEFAULT_CFLAGS)
 DEFAULT_LDFLAGS=""
@@ -141,7 +143,7 @@ AC_ARG_ENABLE([https],
 	*)
 		AC_MSG_ERROR(bad value for https, expected yes/no/auto)
 		;;
-	esac	
+	esac
 	],
 	[
 	https_support=yes

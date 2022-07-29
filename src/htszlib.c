@@ -44,7 +44,7 @@ Please visit our Website: http://www.httrack.com
 
 #include <zlib.h>
 #include "htszlib.h"
-#include "WinPosixFixes.h"
+#include "PlatformFixes.h"
 
 /*
   Unpack file into a new file

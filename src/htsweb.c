@@ -76,7 +76,7 @@ Please visit our Website: http://www.httrack.com
 #endif
 #else
 #endif
-#include "WinPosixFixes.h"
+#include "PlatformFixes.h"
 #undef DEBUG
 #if 0
 #define DEBUG(A) do { A; } while(0)

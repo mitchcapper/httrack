@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="coucal\coucal.c">
+    <ClCompile Include="vendor\coucal\coucal.c">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="htsalias.c">
@@ -99,37 +99,40 @@
     <ClCompile Include="httrack.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="minizip\ioapi.c">
+    <ClCompile Include="vendor\minizip\ioapi.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="minizip\iowin32.c">
+    <ClCompile Include="vendor\minizip\iowin32.c">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="md5.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="minizip\mztools.c">
+    <ClCompile Include="vendor\minizip\mztools.c">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="punycode.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="minizip\unzip.c">
+    <ClCompile Include="vendor\minizip\unzip.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="minizip\zip.c">
+    <ClCompile Include="vendor\minizip\zip.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="path-join\path-join.c">
+    <ClCompile Include="vendor\path-join\path-join.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="path-join\str-ends-with.c">
+    <ClCompile Include="vendor\path-join\str-ends-with.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="path-join\str-starts-with.c">
+    <ClCompile Include="vendor\path-join\str-starts-with.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="cJSON\cJSON.c">
+    <ClCompile Include="vendor\cJSON\cJSON.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PlatformFixes.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -137,10 +140,10 @@
     <ClInclude Include="mmsrip\common.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="coucal\coucal.h">
+    <ClInclude Include="vendor\coucal\coucal.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="minizip\crypt.h">
+    <ClInclude Include="vendor\minizip\crypt.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="hts-indextmpl.h">
@@ -245,40 +248,40 @@
     <ClInclude Include="httrack.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="minizip\ioapi.h">
+    <ClInclude Include="vendor\minizip\ioapi.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="minizip\iowin32.h">
+    <ClInclude Include="vendor\minizip\iowin32.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="md5.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="minizip\mztools.h">
+    <ClInclude Include="vendor\minizip\mztools.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="punycode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="minizip\unzip.h">
+    <ClInclude Include="vendor\minizip\unzip.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="minizip\zip.h">
+    <ClInclude Include="vendor\minizip\zip.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="path-join\path-join.h">
+    <ClInclude Include="vendor\path-join\path-join.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="path-join\str-ends-with.h">
+    <ClInclude Include="vendor\vendor\path-join\str-ends-with.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="path-join\str-starts-with.h">
+    <ClInclude Include="vendor\path-join\str-starts-with.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="cJSON\cJSON.h">
+    <ClInclude Include="vendor\cJSON\cJSON.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="WinPosixFixes.h">
+    <ClInclude Include="PlatformFixes.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

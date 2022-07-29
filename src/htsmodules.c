@@ -52,7 +52,7 @@ extern int fspc(httrackp * opt, FILE * fp, const char *type);
 #include "htszlib.h"
 #include "htsbase.h"
 /* <<< */
-#include "WinPosixFixes.h"
+#include "PlatformFixes.h"
 /* >>> Put all modules variables here */
 
 #if 0

@@ -31,7 +31,7 @@ Please visit our Website: http://www.httrack.com
 #define PROXYTRACK_VERSION "0.5"
 
 /* Store manager */
-#include "../minizip/mztools.h"
+#include "../vendor/minizip/mztools.h"
 #include "store.h"
 #include <sys/stat.h>
 #ifndef HTS_DO_NOT_USE_FTIME

@@ -12,7 +12,7 @@
 #include "str-ends-with.h"
 #include "str-starts-with.h"
 #include "path-join.h"
-
+#include "../PlatformFixes.h"
 
 #define WIN_PATH_JOIN_SEPERATOR   "\\"
 
@@ -22,6 +22,7 @@
 /*
  * Join `dir` with `file`
  */
+char* replace_char(char* str, char find, char replace);
 char* replace_char(char* str, char find, char replace) {
 	char* current_pos = strchr(str, find);
 	while (current_pos) {

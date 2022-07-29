@@ -32,18 +32,18 @@ Please visit our Website: http://www.httrack.com
 
 /* Internal engine bytecode */
 #define HTS_INTERNAL_BYTECODE
-
 #include "htsbauth.h"
 
 /* specific definitions */
 #include "htsglobal.h"
 #include "htslib.h"
 #include "htscore.h"
-#include "cJSON\cJSON.h"
+#include "cJSON/cJSON.h"
 #define JS_ERR_BUF_SIZE 1024
 #define JS_MAX_BUF_SIZE 1024*1024
 #define JS_CJSON_ERROR -123928
 #define JS_UNEXPECTED_DATA_TYPE_ERRNO ENOMSG
+#include "PlatformFixes.h"
 
 
 void DEBUG_COOK_PRINT_EXPANDED(const char* context, t_cookie_expanded* cookie_expanded);
@@ -81,7 +81,7 @@ int cookie_addE(t_cookie * cookie, t_cookie_expanded * cookie_expanded) {
   char *a = cookie->data;
   char *insert;
   char cook[COOKIE_VALUE_BUFFER_SIZE*2];
-  
+
 
   // effacer éventuel cookie en double
   cookie_del(cookie, cookie_expanded->cook_name, cookie_expanded->domain, cookie_expanded->path);
@@ -144,10 +144,10 @@ int cookie_del(t_cookie * cookie, const char *cook_name, const char *domain, con
 // chk_dom: the domain stored in the cookie (potentially wildcard).
 // domain: query domain
 static int cookie_cmp_wildcard_domain(const char *chk_dom, const char *domain) {
-  const size_t n = strlen(chk_dom);
-  const size_t m = strlen(domain);
-  const size_t l = n < m ? n : m;
-  size_t i;
+  const int n = (int)strlen(chk_dom);
+  const int m = (int)strlen(domain);
+  const int l = n < m ? n : m;
+  int i;
   for (i = l - 1; i >= 0; i--) {
     if (chk_dom[n - i - 1] != domain[m - i - 1]) {
       return 1;
@@ -248,7 +248,7 @@ int cookie_load(t_cookie * cookie, const char *fpath, const char *name) {
 
 						  if (fp) {
 							  char dummy[COOKIE_PARAM_BUFFER_SIZE];
-							  
+
 							  //
 							  lien_adrfil af;   // chemin (/)
 							  int cookie_merged = 0;
@@ -298,7 +298,7 @@ int cookie_load(t_cookie * cookie, const char *fpath, const char *name) {
   // Ensuite, cookies.txt
   {
     FILE *fp = fopen(fconcat(file_path_buffer, sizeof(file_path_buffer), fpath, name), "rb");
-	
+
     if (fp) {
 		if (!json_mode) {
 			char BIGSTK line[COOKIE_SINGLE_MAX_SIZE];
@@ -318,7 +318,7 @@ int cookie_load(t_cookie * cookie, const char *fpath, const char *name) {
 		}
 		else
 			parse_json_cookies_from_file(fp, cookie);
-		
+
       fclose(fp);
       return 0;
     }
@@ -341,7 +341,7 @@ errno_t cjson_SafeReadString(const cJSON* object, const char* string_property, c
 	return 0;
 }
 errno_t cjson_SafeWriteString(cJSON* object, const char* string_property, const char* string_val) {
-	
+
 	cJSON* tmp = cJSON_CreateString(string_val);
 	if (tmp == NULL)
 		return ENOMEM;
@@ -380,7 +380,7 @@ int save_json_cookies_to_file(FILE* fp, t_cookie* to_save) {
 		err = cjson_SafeWriteString(cookie, "path", cookie_expanded.path);
 		if (err)
 			goto fail;
-		 
+
 		b = cookie_nextfield(b);
 	}
 	fputs( cJSON_Print(cookies), fp);
@@ -447,13 +447,13 @@ errno_t _parse_cookie_json(FILE* fp, t_cookie* out_cookie) {
 		err = cjson_SafeReadString(cookie, "path", cookie_expanded.path, COOKIE_PARAM_BUFFER_SIZE);
 		if (err)
 			goto fail;
-		
+
 #if DEBUG_COOK
 		DEBUG_COOK_PRINT_EXPANDED("Read a json cookie", cookie_expanded);
 #endif
 		cookie_addE(out_cookie, &cookie_expanded);
 
-		
+
 	}
 	goto cleanup;
 
@@ -480,7 +480,7 @@ int cookie_save(t_cookie * cookie, const char *name) {
   char catbuff[CATBUFF_SIZE];
 
   if (strnotempty(cookie->data)) {
-    
+
     FILE *fp = fopen(fconv(catbuff, sizeof(catbuff), name), "wb");
 	BOOL json_mode = strendwith_(name, ".json");
 

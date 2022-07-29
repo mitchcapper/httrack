@@ -73,7 +73,11 @@ static int linput(FILE * fp, char *s, int max);
 #include <execinfo.h>
 #define USES_BACKTRACE
 #endif
-#include "WinPosixFixes.h"
+#ifndef _WIN32
+#include <sys/resource.h>
+#endif // !_WIN32
+
+#include "PlatformFixes.h"
 /* END specific definitions */
 
 static void __cdecl htsshow_init(t_hts_callbackarg * carg);
@@ -227,6 +231,7 @@ int main(int argc, char **argv) {
 #else
   // https://stackoverflow.com/questions/2275550/change-stack-size-for-a-c-application-in-linux-during-compilation-with-gnu-com
   const rlim_t kStackSize = TARGET_STACK_SIZE;
+  struct rlimit rl;
   int result;
 
   result = getrlimit(RLIMIT_STACK, &rl);

@@ -62,6 +62,7 @@ Please visit our Website: http://www.httrack.com
 
 // arrays
 #include "htsarrays.h"
+#include "PlatformFixes.h"
 
 /** Append bytes to the output buffer up to the pointer 'html'. **/
 #define HT_add_adr do { \
@@ -612,7 +613,7 @@ int htsparse(htsmoduleStruct * str, htsmoduleStructExtended * stre) {
                           b--;
                           while(is_space(*b))
                             b--;
-                          strncpy(s, a, b - a + 1);
+                          strncpy_s(s,sizeof(s), a, b - a + 1);
                           *(s + (b - a) + 1) = '\0';
                         }
 
@@ -622,7 +623,7 @@ int htsparse(htsmoduleStruct * str, htsmoduleStructExtended * stre) {
                           char *const sUtf = 
                             hts_convertStringToUTF8(s, strlen(s), str->page_charset_);
                           if (sUtf != NULL) {
-                            strcpy(s, sUtf);
+                            strcpy_s(s,sizeof(s), sUtf);
                             free(sUtf);
                           }
                         }
@@ -938,7 +939,7 @@ int htsparse(htsmoduleStruct * str, htsmoduleStructExtended * stre) {
                     char BIGSTK tmp[HTS_URLMAXSIZE / 2 + 2];
 
                     tmp[0] = '\0';
-                    strncat(tmp, a + dot + 1, n - dot - 1);
+                    strncat_s(tmp,sizeof(tmp), a + dot + 1, n - dot - 1);
                     if (is_knowntype(opt, tmp) || ishtml_ext(tmp) != -1) {
                       html++;
                       p = 0;

@@ -49,7 +49,7 @@ Please visit our Website: http://www.httrack.com
 #include <unistd.h>
 #endif
 #endif
-#include "WinPosixFixes.h"
+#include "PlatformFixes.h"
 /* END specific definitions */
 
 #define waitkey if (more) { char s[4]; printf("\nMORE.. q to quit\n"); linput(stdin,s,4); if (strcmp(s,"q")==0) quit=1; else printf("Page %d\n\n",++m); }

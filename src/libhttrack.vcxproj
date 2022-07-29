@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="..\..\packages\StoneSteps.zLib.Static.1.2.12.1\build\native\StoneSteps.zLib.Static.props" Condition="Exists('..\..\packages\StoneSteps.zLib.Static.1.2.12.1\build\native\StoneSteps.zLib.Static.props')" />
   <Import Project="..\..\packages\openssl-native.1.0.0\build\native\openssl-native.props" Condition="Exists('..\..\packages\openssl-native.1.0.0\build\native\openssl-native.props')" />
@@ -99,7 +99,7 @@
       <Optimization>Full</Optimization>
       <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
-      <AdditionalIncludeDirectories>coucal;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>vendor;vendor/coucal;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>NDEBUG;WIN32;_WINDOWS;_USRDLL;LIBHTTRACK_EXPORTS;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <StringPooling>true</StringPooling>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
@@ -120,7 +120,7 @@
       <Optimization>Full</Optimization>
       <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
-      <AdditionalIncludeDirectories>coucal;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>vendor;vendor/coucal;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>NDEBUG;WIN32;_WINDOWS;_USRDLL;LIBHTTRACK_EXPORTS;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <StringPooling>true</StringPooling>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
@@ -138,7 +138,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>coucal;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>vendor;vendor/coucal;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_DEBUG;WIN32;_WINDOWS;_USRDLL;LIBHTTRACK_EXPORTS;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
@@ -156,7 +156,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>coucal;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>vendor;vendor/coucal;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_DEBUG;WIN32;_WINDOWS;_USRDLL;LIBHTTRACK_EXPORTS;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
@@ -180,11 +180,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="cJSON\cJSON.c" />
-    <ClCompile Include="path-join\path-join.c" />
-    <ClCompile Include="path-join\str-ends-with.c" />
-    <ClCompile Include="path-join\str-starts-with.c" />
-    <ClCompile Include="coucal\coucal.c" />
+    <ClCompile Include="vendor\cJSON\cJSON.c" />
+    <ClCompile Include="vendor\path-join\path-join.c" />
+    <ClCompile Include="vendor\path-join\str-ends-with.c" />
+    <ClCompile Include="vendor\path-join\str-starts-with.c" />
+    <ClCompile Include="vendor\coucal\coucal.c" />
     <ClCompile Include="htsalias.c" />
     <ClCompile Include="htsback.c" />
     <ClCompile Include="htsbauth.c" />
@@ -213,19 +213,20 @@
     <ClCompile Include="htszlib.c" />
     <ClCompile Include="httrack.c" />
     <ClCompile Include="md5.c" />
-    <ClCompile Include="minizip\ioapi.c" />
-    <ClCompile Include="minizip\iowin32.c" />
-    <ClCompile Include="minizip\mztools.c" />
-    <ClCompile Include="minizip\unzip.c" />
-    <ClCompile Include="minizip\zip.c" />
+    <ClCompile Include="vendor\minizip\ioapi.c" />
+    <ClCompile Include="vendor\minizip\iowin32.c" />
+    <ClCompile Include="vendor\minizip\mztools.c" />
+    <ClCompile Include="vendor\minizip\unzip.c" />
+    <ClCompile Include="vendor\minizip\zip.c" />
+    <ClCompile Include="PlatformFixes.c" />
     <ClCompile Include="punycode.c" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="cJSON\cJSON.h" />
-    <ClInclude Include="path-join\path-join.h" />
-    <ClInclude Include="path-join\str-ends-with.h" />
-    <ClInclude Include="path-join\str-starts-with.h" />
-    <ClInclude Include="coucal\coucal.h" />
+    <ClInclude Include="vendor\cJSON\cJSON.h" />
+    <ClInclude Include="vendor\path-join\path-join.h" />
+    <ClInclude Include="vendor\path-join\str-ends-with.h" />
+    <ClInclude Include="vendor\path-join\str-starts-with.h" />
+    <ClInclude Include="vendor\coucal\coucal.h" />
     <ClInclude Include="hts-indextmpl.h" />
     <ClInclude Include="htsalias.h" />
     <ClInclude Include="htsback.h" />
@@ -261,15 +262,15 @@
     <ClInclude Include="httrack-library.h" />
     <ClInclude Include="httrack.h" />
     <ClInclude Include="md5.h" />
-    <ClInclude Include="minizip\crypt.h" />
-    <ClInclude Include="minizip\ioapi.h" />
-    <ClInclude Include="minizip\iowin32.h" />
-    <ClInclude Include="minizip\mztools.h" />
-    <ClInclude Include="minizip\unzip.h" />
-    <ClInclude Include="minizip\zip.h" />
+    <ClInclude Include="vendor\minizip\crypt.h" />
+    <ClInclude Include="vendor\minizip\ioapi.h" />
+    <ClInclude Include="vendor\minizip\iowin32.h" />
+    <ClInclude Include="vendor\minizip\mztools.h" />
+    <ClInclude Include="vendor\minizip\unzip.h" />
+    <ClInclude Include="vendor\minizip\zip.h" />
     <ClInclude Include="mmsrip\common.h" />
     <ClInclude Include="punycode.h" />
-    <ClInclude Include="WinPosixFixes.h" />
+    <ClInclude Include="PlatformFixes.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="changelog.txt" />

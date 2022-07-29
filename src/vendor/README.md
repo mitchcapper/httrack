@@ -1,0 +1,1 @@
+The 3 safe_ files here are just taken from the official releases that match the tag for the current checkout.   We do this to avoid any autoconf dependency or build requirements for them.

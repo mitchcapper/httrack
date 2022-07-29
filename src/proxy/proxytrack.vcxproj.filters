@@ -15,16 +15,16 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\coucal\coucal.c">
+    <ClCompile Include="..\vendor\coucal\coucal.c">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\htsmd5.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\minizip\ioapi.c">
+    <ClCompile Include="..\vendor\minizip\ioapi.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\minizip\iowin32.c">
+    <ClCompile Include="..\vendor\minizip\iowin32.c">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="main.c">
@@ -33,7 +33,7 @@
     <ClCompile Include="..\md5.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\minizip\mztools.c">
+    <ClCompile Include="..\vendor\minizip\mztools.c">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="proxytrack.c">
@@ -42,10 +42,13 @@
     <ClCompile Include="store.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\minizip\unzip.c">
+    <ClCompile Include="..\vendor\minizip\unzip.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\minizip\zip.c">
+    <ClCompile Include="..\vendor\minizip\zip.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\PlatformFixes.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
