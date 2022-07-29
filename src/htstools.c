@@ -49,7 +49,7 @@ Please visit our Website: http://www.httrack.com
 #endif
 #include <sys/stat.h>
 #endif
-
+#include "WinPosixFixes.h"
 // Portable directory find functions
 #ifndef HTS_DEF_FWSTRUCT_find_handle_struct
 #define HTS_DEF_FWSTRUCT_find_handle_struct

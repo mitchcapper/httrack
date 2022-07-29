@@ -49,6 +49,7 @@ Please visit our Website: http://www.httrack.com
 #include <unistd.h>
 #endif
 #endif
+#include "WinPosixFixes.h"
 /* END specific definitions */
 
 #define waitkey if (more) { char s[4]; printf("\nMORE.. q to quit\n"); linput(stdin,s,4); if (strcmp(s,"q")==0) quit=1; else printf("Page %d\n\n",++m); }
@@ -332,7 +333,7 @@ void help_wizard(httrackp * opt) {
       printf("\n");
 
       // couper en morceaux
-      argv[0] = _strdup("winhttrack");
+      argv[0] = strdup("winhttrack");
       argv[1] = cmd;
       argc++;
       while(cmd[i]) {

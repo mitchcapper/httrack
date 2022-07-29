@@ -33,7 +33,6 @@ Please visit our Website: http://www.httrack.com
 // Fichier librairie .h
 #ifndef HTS_CORE_DEFH
 #define HTS_CORE_DEFH
-
 #include "htsglobal.h"
 
 /* specific definitions */

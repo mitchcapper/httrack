@@ -76,7 +76,7 @@ Please visit our Website: http://www.httrack.com
 #endif
 #else
 #endif
-
+#include "WinPosixFixes.h"
 #undef DEBUG
 #if 0
 #define DEBUG(A) do { A; } while(0)
@@ -314,10 +314,10 @@ static void back_launch_cmd(void *pP) {
   /* copy commandline */
   if (commandReturnCmdl)
     free(commandReturnCmdl);
-  commandReturnCmdl = _strdup(cmd);
+  commandReturnCmdl = strdup(cmd);
 
   /* split */
-  argv[0] = _strdup("webhttrack");
+  argv[0] = strdup("webhttrack");
   argv[1] = cmd;
   argc++;
   i = 0;
@@ -350,7 +350,7 @@ static void back_launch_cmd(void *pP) {
   if (commandReturn) {
     if (commandReturnMsg)
       free(commandReturnMsg);
-    commandReturnMsg = _strdup(hts_errmsg(opt));
+    commandReturnMsg = strdup(hts_errmsg(opt));
   }
 
   /* free */
@@ -374,7 +374,7 @@ static void back_launch_cmd(void *pP) {
 void webhttrack_main(char *cmd) {
   commandRunning = 1;
   DEBUG(fprintf(stderr, "commandRunning=1\n"));
-  hts_newthread(back_launch_cmd, (void *) _strdup(cmd));
+  hts_newthread(back_launch_cmd, (void *) strdup(cmd));
   background_threads++; /* Do not wait for this thread! */
 }
 

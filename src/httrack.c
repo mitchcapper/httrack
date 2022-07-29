@@ -73,6 +73,7 @@ static int linput(FILE * fp, char *s, int max);
 #include <execinfo.h>
 #define USES_BACKTRACE
 #endif
+#include "WinPosixFixes.h"
 /* END specific definitions */
 
 static void __cdecl htsshow_init(t_hts_callbackarg * carg);
@@ -906,7 +907,7 @@ static void print_backtrace(void) {
   }
 #else
   const char msg[] = "No stack trace available on this OS :(\n";
-  if (_write(FD_ERR, msg, sizeof(msg) - 1) != sizeof(msg) - 1) {
+  if (write(FD_ERR, msg, sizeof(msg) - 1) != sizeof(msg) - 1) {
     /* sorry GCC */
   }
 #endif
@@ -944,9 +945,9 @@ static void sig_fatal(int code) {
   size = sizeof(msg) - 1;
   size += print_num(&buffer[size], code);
   buffer[size++] = '\n';
-  (void) (_write(FD_ERR, buffer, (unsigned int)size) == size);
+  (void) (write(FD_ERR, buffer, (unsigned int)size) == size);
   print_backtrace();
-  (void) (_write(FD_ERR, msgreport, sizeof(msgreport) - 1)
+  (void) (write(FD_ERR, msgreport, sizeof(msgreport) - 1)
     == sizeof(msgreport) - 1);
   abort();
 }

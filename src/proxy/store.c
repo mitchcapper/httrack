@@ -58,7 +58,7 @@ static long int  timezone = 0;
 #include "store.h"
 #include "proxystrings.h"
 #include "proxytrack.h"
-
+#include "WinPosixFixes.h"
 /* Unlocked functions */
 
 static int PT_LookupCache__New_u(PT_Index index, const char *url);
@@ -1230,7 +1230,7 @@ static PT_Element PT_ReadCache__New_u(PT_Index index_, const char *url,
     strcpy(r->msg, "File Cache Entry Not Found");
   }
   if (r->location[0] != '\0') {
-    r->location = _strdup(r->location);
+    r->location = strdup(r->location);
   } else {
     r->location = NULL;
   }
@@ -1342,7 +1342,7 @@ static int PT_SaveCache__New(PT_Indexes indexes, const char *filename) {
              PROXYTRACK_VERSION);
     zFileOut = NULL;
     if (ret != 0)
-      (void) _unlink(filename);
+      (void) unlink(filename);
     return ret;
   }
   return -1;
@@ -1823,7 +1823,7 @@ static PT_Element PT_ReadCache__Old_u(PT_Index index_, const char *url,
     strcpy(r->msg, "File Cache Entry Not Found");
   }
   if (r->location[0] != '\0') {
-    r->location = _strdup(r->location);
+    r->location = strdup(r->location);
   } else {
     r->location = NULL;
   }
@@ -2262,7 +2262,7 @@ static PT_Element PT_ReadCache__Arc_u(PT_Index index_, const char *url,
     strcpy(r->msg, "File Cache Entry Not Found");
   }
   if (r->location[0] != '\0') {
-    r->location = _strdup(r->location);
+    r->location = strdup(r->location);
   } else {
     r->location = NULL;
   }
@@ -2395,7 +2395,7 @@ static int PT_SaveCache__Arc(PT_Indexes indexes, const char *filename) {
     ret = PT_EnumCache(indexes, PT_SaveCache__Arc_Fun, (void *) &st);
     fclose(fp);
     if (ret != 0)
-      (void) _unlink(filename);
+      (void) unlink(filename);
     return ret;
   }
   return -1;

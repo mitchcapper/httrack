@@ -33,7 +33,6 @@ Please visit our Website: http://www.httrack.com
 /* Store manager */
 #include "../minizip/mztools.h"
 #include "store.h"
-
 #include <sys/stat.h>
 #ifndef HTS_DO_NOT_USE_FTIME
 #ifdef _WIN32

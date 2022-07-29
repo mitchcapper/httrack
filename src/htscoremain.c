@@ -63,7 +63,7 @@ Please visit our Website: http://www.httrack.com
 #endif
 #endif
 #endif
-
+#include "WinPosixFixes.h"
 /* Resolver */
 extern int IPV6_resolver;
 
@@ -777,7 +777,7 @@ static int hts_main_internal(int argc, char **argv, httrackp * opt) {
               remove(fconcat
                      (OPT_GET_BUFF(opt), OPT_GET_BUFF_SIZE(opt), StringBuff(opt->path_log),
                       "hts-in_progress.lock"));
-            _rmdir(fconcat
+            rmdir(fconcat
                   (OPT_GET_BUFF(opt), OPT_GET_BUFF_SIZE(opt), StringBuff(opt->path_log), "hts-cache"));
             //
           } else if (strfield2(argv[i] + 2, "catchurl")) {      // capture d'URL via proxy temporaire!
@@ -2240,7 +2240,7 @@ static int hts_main_internal(int argc, char **argv, httrackp * opt) {
                        fconcat(OPT_GET_BUFF(opt), OPT_GET_BUFF_SIZE(opt), StringBuff(opt->path_log),
                                "hts-cache/repair.tmp"), &repaired,
                        &repairedBytes) == Z_OK) {
-                    _unlink(name);
+                    unlink(name);
                     rename(fconcat
                            (OPT_GET_BUFF(opt), OPT_GET_BUFF_SIZE(opt), StringBuff(opt->path_log),
                             "hts-cache/repair.zip"), name);
@@ -2430,7 +2430,7 @@ static int hts_main_internal(int argc, char **argv, httrackp * opt) {
                 break;
               case '6':  // entities: httrack -#6 "&foo;" ["encoding"]
                 if (++na < argc) {
-                  char *const s = _strdup(argv[na]);
+                  char *const s = strdup(argv[na]);
                   const char *const enc = na + 1 < argc ? argv[na + 1] : "UTF-8";
                   if (s != NULL 
                     && hts_unescapeEntitiesWithCharset(s, s, strlen(s), 
@@ -2451,7 +2451,7 @@ static int hts_main_internal(int argc, char **argv, httrackp * opt) {
               case '7':  // hashtable selftest: httrack -#7 nb_entries
                 basic_selftests();
                 if (++na < argc) {
-                  char *const snum = _strdup(argv[na]);
+                  char *const snum = strdup(argv[na]);
                   unsigned long count = 0;
                   const char *const names[] = {
                     "", "add", "delete", "dry-add", "dry-del",
@@ -3031,7 +3031,7 @@ static int hts_main_internal(int argc, char **argv, httrackp * opt) {
         int i;
 
 #ifdef _WIN32
-        _mkdir(fconcat
+        mkdir(fconcat
               (OPT_GET_BUFF(opt), OPT_GET_BUFF_SIZE(opt), StringBuff(opt->path_log), "hts-cache"));
 #else
         mkdir(fconcat
@@ -3103,7 +3103,7 @@ static int hts_main_internal(int argc, char **argv, httrackp * opt) {
                 "To pause the engine: create an empty file named 'hts-stop.lock'"
                 LF);
 #if USE_BEGINTHREAD
-        fprintf(fp, "PID=%d\n", (int) _getpid());
+        fprintf(fp, "PID=%d\n", (int) getpid());
 #ifndef _WIN32
         fprintf(fp, "UID=%d\n", (int) getuid());
         fprintf(fp, "GID=%d\n", (int) getuid());
@@ -3259,14 +3259,14 @@ static int hts_main_internal(int argc, char **argv, httrackp * opt) {
 
           sprintf(f, "%s/%s", CACHE_REFNAME, entry->d_name);
           (void)
-            _unlink(fconcat(OPT_GET_BUFF(opt), OPT_GET_BUFF_SIZE(opt), StringBuff(opt->path_log), f));
+            unlink(fconcat(OPT_GET_BUFF(opt), OPT_GET_BUFF_SIZE(opt), StringBuff(opt->path_log), f));
         }
       }
       if (dir != NULL) {
         (void) closedir(dir);
       }
       (void)
-        _rmdir(fconcat
+        rmdir(fconcat
               (OPT_GET_BUFF(opt), OPT_GET_BUFF_SIZE(opt), StringBuff(opt->path_log), CACHE_REFNAME));
     }
 

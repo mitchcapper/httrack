@@ -64,6 +64,7 @@ Please visit our Website: http://www.httrack.com
 /* Dynamic typed arrays */
 #include "htsarrays.h"
 
+#include "WinPosixFixes.h"
 /* END specific definitions */
 
 /* external modules */
@@ -1607,7 +1608,7 @@ int httpmirror(char *url1, httrackp * opt) {
 
           /* Remove file if being processed */
           if (is_loaded_from_file) {
-            (void) _unlink(fconv(OPT_GET_BUFF(opt), OPT_GET_BUFF_SIZE(opt), savename()));
+            (void) unlink(fconv(OPT_GET_BUFF(opt), OPT_GET_BUFF_SIZE(opt), savename()));
             is_loaded_from_file = 0;
           }
 
@@ -2232,7 +2233,7 @@ int httpmirror(char *url1, httrackp * opt) {
 
                       strcpybuff(file, StringBuff(opt->path_html));
                       strcatbuff(file, line + 1);
-                      while((strnotempty(file)) && (_rmdir(file) == 0)) {        // ok, éliminé (existait)
+                      while((strnotempty(file)) && (rmdir(file) == 0)) {        // ok, éliminé (existait)
                         purge = 1;
                         if (opt->log) {
                           hts_log_print(opt, LOG_INFO, "Purging directory %s/",
@@ -2580,7 +2581,7 @@ int filters_init(char ***ptrfilters, int maxfilter, int filterinc) {
 
 static int mkdir_compat(const char *pathname) {
 #ifdef _WIN32
-  return _mkdir(pathname);
+  return mkdir(pathname);
 #else
   return mkdir(pathname, HTS_ACCESS_FOLDER);
 #endif
@@ -3101,7 +3102,7 @@ static void postprocess_file(httrackp * opt, const char *save, const char *adr,
                 (OPT_GET_BUFF(opt), OPT_GET_BUFF_SIZE(opt),
                 StringBuff(opt->path_html), "index.mht"),
                 "wb");
-        (void) _unlink(fconcat(OPT_GET_BUFF(opt), OPT_GET_BUFF_SIZE(opt),
+        (void) unlink(fconcat(OPT_GET_BUFF(opt), OPT_GET_BUFF_SIZE(opt),
           StringBuff(opt->path_html),
                               "index.eml"));
 #ifndef _WIN32

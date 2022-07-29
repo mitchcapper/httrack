@@ -83,7 +83,7 @@ Please visit our Website: http://www.httrack.com
 #endif /* _WIN32 */
 
 #include <sys/stat.h>
-
+#include "WinPosixFixes.h"
 #ifdef __ANDROID__
 #define timezone 0
 #endif
@@ -3031,7 +3031,7 @@ int finput(T_SOC fd, char* s, int max) {
 
 	do {
 		//c=fgetc(fp);
-		if (_read((int)fd, &c, 1) <= 0) {
+		if (read((int)fd, &c, 1) <= 0) {
 			c = 0;
 		}
 		if (c != 0) {
@@ -4488,7 +4488,7 @@ HTSEXT_API const char* hts_rootdir(char* file) {
 					strc.path[0] = '\0';
 			}
 			if (!strnotempty(strc.path)) {
-				if (_getcwd(strc.path, sizeof(strc.path)) == NULL)
+				if (getcwd(strc.path, sizeof(strc.path)) == NULL)
 					strc.path[0] = '\0';
 				else
 					strcatbuff(strc.path, "/");
@@ -5944,7 +5944,7 @@ void* hts_get_callback(t_hts_htmlcheck_callbacks* callbacks, const char* name) {
 /* libc stubs */
 
 HTSEXT_API char* hts_strdup(const char* str) {
-	return _strdup(str);
+	return strdup(str);
 }
 
 HTSEXT_API void* hts_malloc(size_t size) {
@@ -6087,7 +6087,7 @@ int hts_unlink_utf8(const char* path) {
 		return result;
 	} else {
 		// Fallback on conversion error.
-		return _unlink(path);
+		return unlink(path);
 	}
 }
 
@@ -6122,7 +6122,7 @@ int hts_mkdir_utf8(const char* path) {
 		return result;
 	} else {
 		// Fallback on conversion error.
-		return _mkdir(path);
+		return mkdir(path);
 	}
 }
 
@@ -6137,7 +6137,7 @@ HTSEXT_API int hts_utime_utf8(const char* path, const STRUCT_UTIMBUF* times) {
 		return result;
 	} else {
 		// Fallback on conversion error.
-		return _utime(path, &mtimes);
+		return utime(path, &mtimes);
 	}
 }
 

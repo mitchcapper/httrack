@@ -43,6 +43,7 @@ Please visit our Website: http://www.httrack.com
 #include <time.h>
 
 #include "htszlib.h"
+#include "WinPosixFixes.h"
 /* END specific definitions */
 
 // routines de mise en cache
@@ -1406,9 +1407,9 @@ void cache_init(cache_back * cache, httrackp * opt) {
 #endif
     if (!cache->ro) {
 #ifdef _WIN32
-      _mkdir(fconcat(OPT_GET_BUFF(opt), OPT_GET_BUFF_SIZE(opt), StringBuff(opt->path_log), "hts-cache"));
+      mkdir(fconcat(OPT_GET_BUFF(opt), OPT_GET_BUFF_SIZE(opt), StringBuff(opt->path_log), "hts-cache"));
 #else
-      _mkdir(fconcat(OPT_GET_BUFF(opt), OPT_GET_BUFF_SIZE(opt), StringBuff(opt->path_log), "hts-cache"),
+      mkdir(fconcat(OPT_GET_BUFF(opt), OPT_GET_BUFF_SIZE(opt), StringBuff(opt->path_log), "hts-cache"),
             HTS_PROTECT_FOLDER);
 #endif
       if ((fexist(fconcat(OPT_GET_BUFF(opt), OPT_GET_BUFF_SIZE(opt), StringBuff(opt->path_log), "hts-cache/new.zip")))) {       // il existe déja un cache précédent.. renommer
@@ -1575,7 +1576,7 @@ void cache_init(cache_back * cache, httrackp * opt) {
                                                       StringBuff(opt->path_log),
                                                       "hts-cache/repair.tmp"),
              &repaired, &repairedBytes) == Z_OK) {
-          _unlink(name);
+          unlink(name);
           rename(fconcat
                  (OPT_GET_BUFF(opt), OPT_GET_BUFF_SIZE(opt), StringBuff(opt->path_log),
                   "hts-cache/repair.zip"), name);
