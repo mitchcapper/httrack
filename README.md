@@ -2,7 +2,9 @@
 
 ## This Fork
 
-HTTrack ( https://github.com/xroche/httrack ) development seems stalled (last release May 2017, last commit Nov, 2019).  I make no statements or guarantees on updating this or merging PR but if they are clean I should have the time to do so.  At a minimum should give a good starting point for someone else to continue to maintain this.
+HTTrack ( https://github.com/xroche/httrack ) development seems stalled (last release May 2017, last commit Nov, 2019).  I make no statements or guarantees on updating this or merging PRs but if they are clean I should have the time to do so.  At a minimum should give a good starting point for someone else to continue to maintain this.
+
+There are automatic binary builds made for every commit.   If you are logged into github you are able to download the "artifacts" or zip files of the final products and source from them.  See: [Actions · mitchcapper/httrack · GitHub](https://github.com/mitchcapper/httrack/actions/workflows/continuous.yml) for the runs, click on a run and scroll to the bottom to find artifacts.
 
 ## Fork Changes
 
