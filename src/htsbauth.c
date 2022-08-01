@@ -438,7 +438,7 @@ errno_t _parse_cookie_json(FILE* fp, t_cookie* out_cookie) {
 		err = cjson_SafeReadString(cookie, "name", cookie_expanded.cook_name, COOKIE_PARAM_BUFFER_SIZE);
 		if (err)
 			goto fail;
-		err = cjson_SafeReadString(cookie, "value", cookie_expanded.cook_value, COOKIE_PARAM_BUFFER_SIZE);
+		err = cjson_SafeReadString(cookie, "value", cookie_expanded.cook_value, COOKIE_VALUE_BUFFER_SIZE);
 		if (err)
 			goto fail;
 		err = cjson_SafeReadString(cookie, "domain", cookie_expanded.domain, COOKIE_PARAM_BUFFER_SIZE);
