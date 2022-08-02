@@ -44,8 +44,8 @@ Please visit our Website: http://www.httrack.com
 /* Library internal definictions */
 #ifdef HTS_INTERNAL_BYTECODE
 
-int cmdl_opt(char *s);
-int check_path(String * s, char *defaultname);
+int cmdl_opt(char* s);
+int check_path(String* s, char* defaultname);
 
 #endif
 

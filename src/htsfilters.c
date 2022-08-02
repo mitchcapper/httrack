@@ -54,43 +54,43 @@ Please visit our Website: http://www.httrack.com
 // optionnel: taille à contrôller (ou numéro, etc) en pointeur
 //            (en de détection de *size, la taille limite est écrite par dessus *size)
 // exemple: +-*.gif*[<5] == supprimer GIF si <5KB
-int fa_strjoker(int type, char **filters, int nfil, const char *nom, LLint * size,
-                int *size_flag, int *depth) {
-  int verdict = 0;              // on sait pas
-  int i;
-  LLint sizelimit = 0;
+int fa_strjoker(int type, char** filters, int nfil, const char* nom, LLint* size,
+	int* size_flag, int* depth) {
+	int verdict = 0;              // on sait pas
+	int i;
+	LLint sizelimit = 0;
 
-  if (size)
-    sizelimit = *size;
-  for(i = 0; i < nfil; i++) {
-    LLint sz;
-    int filteroffs = 1;
+	if (size)
+		sizelimit = *size;
+	for (i = 0; i < nfil; i++) {
+		LLint sz;
+		int filteroffs = 1;
 
-    if (strncmp(filters[i] + filteroffs, "mime:", 5) == 0) {
-      if (type == 0)            // regular filters
-        continue;
-      filteroffs += 5;          // +mime:text/html
-    } else {                    // mime filters
-      if (type != 0)
-        continue;
-    }
-    if (size)
-      sz = *size;
-    if (strjoker(nom, filters[i] + filteroffs, &sz, size_flag)) {       // reconnu
-      if (size)
-        if (sz != *size)
-          sizelimit = sz;
-      if (filters[i][0] == '+')
-        verdict = 1;            // autorisé
-      else
-        verdict = -1;           // interdit
-      if (depth)
-        *depth = i;
-    }
-  }
-  if (size)
-    *size = sizelimit;
-  return verdict;
+		if (strncmp(filters[i] + filteroffs, "mime:", 5) == 0) {
+			if (type == 0)            // regular filters
+				continue;
+			filteroffs += 5;          // +mime:text/html
+		} else {                    // mime filters
+			if (type != 0)
+				continue;
+		}
+		if (size)
+			sz = *size;
+		if (strjoker(nom, filters[i] + filteroffs, &sz, size_flag)) {       // reconnu
+			if (size)
+				if (sz != *size)
+					sizelimit = sz;
+			if (filters[i][0] == '+')
+				verdict = 1;            // autorisé
+			else
+				verdict = -1;           // interdit
+			if (depth)
+				*depth = i;
+		}
+	}
+	if (size)
+		*size = sizelimit;
+	return verdict;
 }
 
 // supercomparateur joker (tm)
@@ -101,248 +101,248 @@ int fa_strjoker(int type, char **filters, int nfil, const char *nom, LLint * siz
 // cet algo est 'un peu' récursif mais ne consomme pas trop de tm
 // * = toute lettre
 // --?-- : spécifique à HTTrack et aux ?
-HTS_INLINE const char *strjoker(const char *chaine, const char *joker, LLint * size,
-                          int *size_flag) {
-  //int err=0;
-  if (strnotempty(joker) == 0) {        // fin de chaine joker
-    if (strnotempty(chaine) == 0)       // fin aussi pour la chaine: ok
-      return chaine;
-    else if (chaine[0] == '?')
-      return chaine;            // --?-- pour les index.html?Choix=2
-    else
-      return NULL;              // non trouvé
-  }
-  // on va progresser en suivant les 'mots' contenus dans le joker
-  // un mot peut être un * ou bien toute autre séquence de lettres
+HTS_INLINE const char* strjoker(const char* chaine, const char* joker, LLint* size,
+	int* size_flag) {
+	//int err=0;
+	if (strnotempty(joker) == 0) {        // fin de chaine joker
+		if (strnotempty(chaine) == 0)       // fin aussi pour la chaine: ok
+			return chaine;
+		else if (chaine[0] == '?')
+			return chaine;            // --?-- pour les index.html?Choix=2
+		else
+			return NULL;              // non trouvé
+	}
+	// on va progresser en suivant les 'mots' contenus dans le joker
+	// un mot peut être un * ou bien toute autre séquence de lettres
 
-  if (strcmp(joker, "*") == 0) {        // ok, rien après
-    return chaine;
-  }
-  // 1er cas: jokers * ou jokers multiples *[..]
-  if (joker[0] == '*') {        // comparer joker+reste (*toto/..)
-    int jmp;                    // nombre de caractères pour le prochain mot dans joker
-    int cut = 0;                // interdire tout caractère superflu
-    char pass[256];
-    char LEFT = '[', RIGHT = ']';
-    int unique = 0;
+	if (strcmp(joker, "*") == 0) {        // ok, rien après
+		return chaine;
+	}
+	// 1er cas: jokers * ou jokers multiples *[..]
+	if (joker[0] == '*') {        // comparer joker+reste (*toto/..)
+		int jmp;                    // nombre de caractères pour le prochain mot dans joker
+		int cut = 0;                // interdire tout caractère superflu
+		char pass[256];
+		char LEFT = '[', RIGHT = ']';
+		int unique = 0;
 
-    switch (joker[1]) {
-    case '[':
-      LEFT = '[';
-      RIGHT = ']';
-      unique = 0;
-      break;
-    case '(':
-      LEFT = '(';
-      RIGHT = ')';
-      unique = 1;
-      break;
-    }
+		switch (joker[1]) {
+		case '[':
+			LEFT = '[';
+			RIGHT = ']';
+			unique = 0;
+			break;
+		case '(':
+			LEFT = '(';
+			RIGHT = ')';
+			unique = 1;
+			break;
+		}
 
-    if ((joker[1] == LEFT) && (joker[2] != LEFT)) {     // multijoker (tm)
-      int i;
+		if ((joker[1] == LEFT) && (joker[2] != LEFT)) {     // multijoker (tm)
+			int i;
 
-      for(i = 0; i < 256; i++)
-        pass[i] = 0;
+			for (i = 0; i < 256; i++)
+				pass[i] = 0;
 
-      // noms réservés
-      if ((strfield(joker + 2, "file")) || (strfield(joker + 2, "name"))) {
-        for(i = 0; i < 256; i++)
-          pass[i] = 1;
-        pass[(int) '?'] = 0;
-        //pass[(int) ';'] = 0;
-        pass[(int) '/'] = 0;
-        i = 2;
-        {
-          int len = (int) strlen(joker);
+			// noms réservés
+			if ((strfield(joker + 2, "file")) || (strfield(joker + 2, "name"))) {
+				for (i = 0; i < 256; i++)
+					pass[i] = 1;
+				pass[(int)'?'] = 0;
+				//pass[(int) ';'] = 0;
+				pass[(int)'/'] = 0;
+				i = 2;
+				{
+					int len = (int)strlen(joker);
 
-          while((joker[i] != RIGHT) && (joker[i]) && (i < len))
-            i++;
-        }
-      } else if (strfield(joker + 2, "path")) {
-        for(i = 0; i < 256; i++)
-          pass[i] = 1;
-        pass[(int) '?'] = 0;
-        //pass[(int) ';'] = 0;
-        i = 2;
-        {
-          int len = (int) strlen(joker);
+					while ((joker[i] != RIGHT) && (joker[i]) && (i < len))
+						i++;
+				}
+			} else if (strfield(joker + 2, "path")) {
+				for (i = 0; i < 256; i++)
+					pass[i] = 1;
+				pass[(int)'?'] = 0;
+				//pass[(int) ';'] = 0;
+				i = 2;
+				{
+					int len = (int)strlen(joker);
 
-          while((joker[i] != RIGHT) && (joker[i]) && (i < len))
-            i++;
-        }
-      } else if (strfield(joker + 2, "param")) {
-        if (chaine[0] == '?') { // il y a un paramètre juste là
-          for(i = 0; i < 256; i++)
-            pass[i] = 1;
-        }                       // sinon synonyme de 'rien'
-        i = 2;
-        {
-          int len = (int) strlen(joker);
+					while ((joker[i] != RIGHT) && (joker[i]) && (i < len))
+						i++;
+				}
+			} else if (strfield(joker + 2, "param")) {
+				if (chaine[0] == '?') { // il y a un paramètre juste là
+					for (i = 0; i < 256; i++)
+						pass[i] = 1;
+				}                       // sinon synonyme de 'rien'
+				i = 2;
+				{
+					int len = (int)strlen(joker);
 
-          while((joker[i] != RIGHT) && (joker[i]) && (i < len))
-            i++;
-        }
-      } else {
-        // décode les directives comme *[A-Z,âêîôû,0-9]
-        i = 2;
-        if (joker[i] == RIGHT) {        // *[] signifie "plus rien après"
-          cut = 1;              // caractère supplémentaire interdit
-        } else {
-          int len = (int) strlen(joker);
+					while ((joker[i] != RIGHT) && (joker[i]) && (i < len))
+						i++;
+				}
+			} else {
+				// décode les directives comme *[A-Z,âêîôû,0-9]
+				i = 2;
+				if (joker[i] == RIGHT) {        // *[] signifie "plus rien après"
+					cut = 1;              // caractère supplémentaire interdit
+				} else {
+					int len = (int)strlen(joker);
 
-          while((joker[i] != RIGHT) && (joker[i]) && (i < len)) {
-            if ((joker[i] == '<') || (joker[i] == '>')) {       // *[<10]
-              int lsize = 0;
-              int lverdict;
+					while ((joker[i] != RIGHT) && (joker[i]) && (i < len)) {
+						if ((joker[i] == '<') || (joker[i] == '>')) {       // *[<10]
+							int lsize = 0;
+							int lverdict;
 
-              i++;
-              if (sscanf(joker + i, "%d", &lsize) == 1) {
-                if (size) {
-                  if (*size >= 0) {
-                    if (size_flag)
-                      *size_flag = 1;   /* a joué */
-                    if (joker[i - 1] == '<')
-                      lverdict = (*size < lsize);
-                    else
-                      lverdict = (*size > lsize);
-                    if (!lverdict) {
-                      return NULL;      // ne correspond pas
-                    } else {
-                      *size = lsize;
-                      return chaine;    // ok
-                    }
-                  } else
-                    return NULL;        // ne correspond pas
-                } else
-                  return NULL;  // ne correspond pas (test impossible)
-                // jump
-                while(isdigit((unsigned char) joker[i]))
-                  i++;
-              }
-            } else if (joker[i + 1] == '-') {   // 2 car, ex: *[A-Z]
-              if ((int) (unsigned char) joker[i + 2] >
-                  (int) (unsigned char) joker[i]) {
-                int j;
+							i++;
+							if (sscanf(joker + i, "%d", &lsize) == 1) {
+								if (size) {
+									if (*size >= 0) {
+										if (size_flag)
+											*size_flag = 1;   /* a joué */
+										if (joker[i - 1] == '<')
+											lverdict = (*size < lsize);
+										else
+											lverdict = (*size > lsize);
+										if (!lverdict) {
+											return NULL;      // ne correspond pas
+										} else {
+											*size = lsize;
+											return chaine;    // ok
+										}
+									} else
+										return NULL;        // ne correspond pas
+								} else
+									return NULL;  // ne correspond pas (test impossible)
+								  // jump
+								while (isdigit((unsigned char)joker[i]))
+									i++;
+							}
+						} else if (joker[i + 1] == '-') {   // 2 car, ex: *[A-Z]
+							if ((int)(unsigned char)joker[i + 2] >
+								(int)(unsigned char)joker[i]) {
+								int j;
 
-                for(j = (int) (unsigned char) joker[i];
-                    j <= (int) (unsigned char) joker[i + 2]; j++)
-                  pass[j] = 1;
+								for (j = (int)(unsigned char)joker[i];
+									j <= (int)(unsigned char)joker[i + 2]; j++)
+									pass[j] = 1;
 
-              }
-              // else err=1;
-              i += 3;
-            } else {            // 1 car, ex: *[ ]
-              if (joker[i + 2] == '\\' && joker[i + 3] != 0) {  // escaped char, such as *[\[] or *[\]]
-                i++;
-              }
-              pass[(int) (unsigned char) joker[i]] = 1;
-              i++;
-            }
-            if ((joker[i] == ',') || (joker[i] == ';'))
-              i++;
-          }
-        }
-      }
-      // à sauter dans joker
-      jmp = i;
-      if (joker[i])
-        jmp++;
+							}
+							// else err=1;
+							i += 3;
+						} else {            // 1 car, ex: *[ ]
+							if (joker[i + 2] == '\\' && joker[i + 3] != 0) {  // escaped char, such as *[\[] or *[\]]
+								i++;
+							}
+							pass[(int)(unsigned char)joker[i]] = 1;
+							i++;
+						}
+						if ((joker[i] == ',') || (joker[i] == ';'))
+							i++;
+					}
+				}
+			}
+			// à sauter dans joker
+			jmp = i;
+			if (joker[i])
+				jmp++;
 
-      //
-    } else {                    // tout autoriser
-      //
-      int i;
+			//
+		} else {                    // tout autoriser
+		  //
+			int i;
 
-      for(i = 0; i < 256; i++)
-        pass[i] = 1;            // tout autoriser
-      jmp = 1;
-      ////if (joker[2]==LEFT) jmp=3;        // permet de recher *<crochet ouvrant>
-    }
+			for (i = 0; i < 256; i++)
+				pass[i] = 1;            // tout autoriser
+			jmp = 1;
+			////if (joker[2]==LEFT) jmp=3;        // permet de recher *<crochet ouvrant>
+		}
 
-    {
-      int i, max;
-      const char *adr;
+		{
+			int i, max;
+			const char* adr;
 
-      // la chaine doit se terminer exactement
-      if (cut) {
-        if (strnotempty(chaine))
-          return NULL;          // perdu
-        else
-          return chaine;        // ok
-      }
-      // comparaison en boucle, c'est ca qui consomme huhu..
-      // le tableau pass[256] indique les caractères ASCII autorisés
+			// la chaine doit se terminer exactement
+			if (cut) {
+				if (strnotempty(chaine))
+					return NULL;          // perdu
+				else
+					return chaine;        // ok
+			}
+			// comparaison en boucle, c'est ca qui consomme huhu..
+			// le tableau pass[256] indique les caractères ASCII autorisés
 
-      // tester sans le joker (pas ()+ mais ()*)
-      if (!unique) {
-        if ((adr = strjoker(chaine, joker + jmp, size, size_flag))) {
-          return adr;
-        }
-      }
-      // tester
-      i = 0;
-      if (!unique)
-        max = (int) strlen(chaine);
-      else                      /* *(a) only match a (not aaaaa) */
-        max = 1;
-      while(i < (int) max) {
-        if (pass[(int) (unsigned char) chaine[i]]) {    // caractère autorisé
-          if ((adr = strjoker(chaine + i + 1, joker + jmp, size, size_flag))) {
-            return adr;
-          }
-          i++;
-        } else
-          i = max + 2;          // sortir
-      }
+			// tester sans le joker (pas ()+ mais ()*)
+			if (!unique) {
+				if ((adr = strjoker(chaine, joker + jmp, size, size_flag))) {
+					return adr;
+				}
+			}
+			// tester
+			i = 0;
+			if (!unique)
+				max = (int)strlen(chaine);
+			else                      /* *(a) only match a (not aaaaa) */
+				max = 1;
+			while (i < (int)max) {
+				if (pass[(int)(unsigned char)chaine[i]]) {    // caractère autorisé
+					if ((adr = strjoker(chaine + i + 1, joker + jmp, size, size_flag))) {
+						return adr;
+					}
+					i++;
+				} else
+					i = max + 2;          // sortir
+			}
 
-      // tester chaîne vide
-      if (i != max + 2)         // avant c'est ok
-        if ((adr = strjoker(chaine + max, joker + jmp, size, size_flag)))
-          return adr;
+			// tester chaîne vide
+			if (i != max + 2)         // avant c'est ok
+				if ((adr = strjoker(chaine + max, joker + jmp, size, size_flag)))
+					return adr;
 
-      return NULL;              // perdu
-    }
+			return NULL;              // perdu
+		}
 
-  } else {                      // comparer mot+reste (toto*..)
-    if (strnotempty(chaine)) {
-      int jmp = 0, ok = 1;
+	} else {                      // comparer mot+reste (toto*..)
+		if (strnotempty(chaine)) {
+			int jmp = 0, ok = 1;
 
-      // comparer début de joker et début de chaine
-      while((joker[jmp] != '*') && (joker[jmp]) && (ok)) {
-        // CI : remplacer streql par une comparaison !=
-        if (!streql(chaine[jmp], joker[jmp])) {
-          ok = 0;               // quitter
-        }
-        jmp++;
-      }
+			// comparer début de joker et début de chaine
+			while ((joker[jmp] != '*') && (joker[jmp]) && (ok)) {
+				// CI : remplacer streql par une comparaison !=
+				if (!streql(chaine[jmp], joker[jmp])) {
+					ok = 0;               // quitter
+				}
+				jmp++;
+			}
 
-      // comparaison ok?
-      if (ok) {
-        // continuer la comparaison.
-        if (strjoker(chaine + jmp, joker + jmp, size, size_flag))
-          return chaine;        // retourner 1e lettre
-      }
+			// comparaison ok?
+			if (ok) {
+				// continuer la comparaison.
+				if (strjoker(chaine + jmp, joker + jmp, size, size_flag))
+					return chaine;        // retourner 1e lettre
+			}
 
-    }                           // strlen(a)
-    return NULL;
-  }                             // * ou mot
+		}                           // strlen(a)
+		return NULL;
+	}                             // * ou mot
 
-  return NULL;
+	return NULL;
 }
 
 // recherche multiple
 // exemple: find dans un texte de strcpybuff(*[A-Z,a-z],"*[0-9]"); va rechercher la première occurence
 // d'un strcpy sur une variable ayant un nom en lettres et copiant une chaine de chiffres
 // ATTENTION!! Eviter les jokers en début, où gare au temps machine!
-const char *strjokerfind(const char *chaine, const char *joker) {
-  const char *adr;
+const char* strjokerfind(const char* chaine, const char* joker) {
+	const char* adr;
 
-  while(*chaine) {
-    if ((adr = strjoker(chaine, joker, NULL, NULL))) {  // ok trouvé
-      return adr;
-    }
-    chaine++;
-  }
-  return NULL;
+	while (*chaine) {
+		if ((adr = strjoker(chaine, joker, NULL, NULL))) {  // ok trouvé
+			return adr;
+		}
+		chaine++;
+	}
+	return NULL;
 }

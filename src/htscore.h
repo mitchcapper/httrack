@@ -134,8 +134,8 @@ typedef struct filecreate_params filecreate_params;
 typedef struct lien_adrfil lien_adrfil;
 #endif
 struct lien_adrfil {
-  char adr[HTS_URLMAXSIZE * 2];      // adresse
-  char fil[HTS_URLMAXSIZE * 2];      // nom du fichier distant
+	char adr[HTS_URLMAXSIZE * 2];      // adresse
+	char fil[HTS_URLMAXSIZE * 2];      // nom du fichier distant
 };
 
 // adr, fil, save
@@ -144,8 +144,8 @@ struct lien_adrfil {
 typedef struct lien_adrfilsave lien_adrfilsave;
 #endif
 struct lien_adrfilsave {
-  lien_adrfil af;
-  char save[HTS_URLMAXSIZE * 2];     // nom à sauver sur disque (avec chemin éventuel)
+	lien_adrfil af;
+	char save[HTS_URLMAXSIZE * 2];     // nom à sauver sur disque (avec chemin éventuel)
 };
 
 #ifndef HTS_DEF_FWSTRUCT_struct_back
@@ -153,10 +153,10 @@ struct lien_adrfilsave {
 typedef struct struct_back struct_back;
 #endif
 struct struct_back {
-  lien_back *lnk;
-  int count;
-  coucal ready;
-  LLint ready_size_bytes;
+	lien_back* lnk;
+	int count;
+	coucal ready;
+	LLint ready_size_bytes;
 };
 
 typedef struct cache_back_zip_entry cache_back_zip_entry;
@@ -167,31 +167,31 @@ typedef struct cache_back_zip_entry cache_back_zip_entry;
 typedef struct cache_back cache_back;
 #endif
 struct cache_back {
-  int version;                  // 0 ou 1
-  /* */
-  int type;
-  int ro;
-  FILE *dat, *ndx, *olddat;
-  char *use;                    // liste des adr+fil
-  FILE *lst;                    // liste des fichiers pour la "purge"
-  FILE *txt;                    // liste des fichiers (info)
-  char lastmodified[256];
-  // HASH
-  coucal hashtable;
-  // HASH for tests (naming subsystem)
-  coucal cached_tests;
-  // fichiers log optionnels
-  FILE *log;
-  FILE *errlog;
-  // variables
-  int ptr_ant;                  // pointeur pour anticiper
-  int ptr_last;                 // pointeur pour anticiper
-  //
-  void *zipInput;
-  void *zipOutput;
-  cache_back_zip_entry *zipEntries;
-  int zipEntriesOffs;
-  int zipEntriesCapa;
+	int version;                  // 0 ou 1
+	/* */
+	int type;
+	int ro;
+	FILE* dat, * ndx, * olddat;
+	char* use;                    // liste des adr+fil
+	FILE* lst;                    // liste des fichiers pour la "purge"
+	FILE* txt;                    // liste des fichiers (info)
+	char lastmodified[256];
+	// HASH
+	coucal hashtable;
+	// HASH for tests (naming subsystem)
+	coucal cached_tests;
+	// fichiers log optionnels
+	FILE* log;
+	FILE* errlog;
+	// variables
+	int ptr_ant;                  // pointeur pour anticiper
+	int ptr_last;                 // pointeur pour anticiper
+	//
+	void* zipInput;
+	void* zipOutput;
+	cache_back_zip_entry* zipEntries;
+	int zipEntriesOffs;
+	int zipEntriesCapa;
 };
 
 #ifndef HTS_DEF_FWSTRUCT_hash_struct
@@ -199,19 +199,19 @@ struct cache_back {
 typedef struct hash_struct hash_struct;
 #endif
 struct hash_struct {
-  /* Links big array reference */
-  const lien_url *const*const*liens;
-  /* Savename (case insensitive ; lowercased) */
-  coucal sav;
-  /* Address and path */
-  coucal adrfil;
-  /* Former address and path */
-  coucal former_adrfil;
-  /** Buffers **/
-  int normalized;
-  char normfil[HTS_URLMAXSIZE * 2];
-  char normfil2[HTS_URLMAXSIZE * 2];
-  char catbuff[CATBUFF_SIZE];
+	/* Links big array reference */
+	const lien_url* const* const* liens;
+	/* Savename (case insensitive ; lowercased) */
+	coucal sav;
+	/* Address and path */
+	coucal adrfil;
+	/* Former address and path */
+	coucal former_adrfil;
+	/** Buffers **/
+	int normalized;
+	char normfil[HTS_URLMAXSIZE * 2];
+	char normfil2[HTS_URLMAXSIZE * 2];
+	char catbuff[CATBUFF_SIZE];
 };
 
 #ifndef HTS_DEF_FWSTRUCT_filecreate_params
@@ -219,8 +219,8 @@ struct hash_struct {
 typedef struct filecreate_params filecreate_params;
 #endif
 struct filecreate_params {
-  FILE *lst;
-  char path[HTS_URLMAXSIZE * 2];
+	FILE* lst;
+	char path[HTS_URLMAXSIZE * 2];
 };
 
 /* Access macros. */
@@ -240,12 +240,12 @@ struct filecreate_params {
 /* Library internal definictions */
 #ifdef HTS_INTERNAL_BYTECODE
 
-HTS_STATIC int cache_writable(cache_back * cache) {
-  return (cache != NULL && (cache->dat != NULL || cache->zipOutput != NULL));
+HTS_STATIC int cache_writable(cache_back* cache) {
+	return (cache != NULL && (cache->dat != NULL || cache->zipOutput != NULL));
 }
 
-HTS_STATIC int cache_readable(cache_back * cache) {
-  return (cache != NULL && (cache->olddat != NULL || cache->zipInput != NULL));
+HTS_STATIC int cache_readable(cache_back* cache) {
+	return (cache != NULL && (cache->olddat != NULL || cache->zipInput != NULL));
 }
 
 #endif
@@ -257,92 +257,92 @@ HTS_STATIC int cache_readable(cache_back * cache) {
 /* Library internal definictions */
 #ifdef HTS_INTERNAL_BYTECODE
 
-char *hts_cancel_file_pop(httrackp * opt);
+char* hts_cancel_file_pop(httrackp* opt);
 
 #endif
 
 // add a link on the heap
-int hts_record_link(httrackp * opt,
-                    const char *address, const char *file, const char *save,
-                    const char *ref_address, const char *ref_file,
-                    const char *codebase);
+int hts_record_link(httrackp* opt,
+	const char* address, const char* file, const char* save,
+	const char* ref_address, const char* ref_file,
+	const char* codebase);
 
 // index of the latest added link
-size_t hts_record_link_latest(httrackp *opt);
+size_t hts_record_link_latest(httrackp* opt);
 
 // invalidate an entry
-void hts_invalidate_link(httrackp * opt, int lpos);
+void hts_invalidate_link(httrackp* opt, int lpos);
 
 // wipe all records
-void hts_record_init(httrackp *opt);
-void hts_record_free(httrackp *opt);
+void hts_record_init(httrackp* opt);
+void hts_record_free(httrackp* opt);
 
 //int httpmirror(char* url,int level,httrackp opt);
-int httpmirror(char *url1, httrackp * opt);
-int filesave(httrackp * opt, const char *adr, int len, const char *s,
-             const char *url_adr /* = NULL */ ,
-             const char *url_fil /* = NULL */ );
-char *hts_cancel_file_pop(httrackp * opt);
+int httpmirror(char* url1, httrackp* opt);
+int filesave(httrackp* opt, const char* adr, int len, const char* s,
+	const char* url_adr /* = NULL */,
+	const char* url_fil /* = NULL */);
+char* hts_cancel_file_pop(httrackp* opt);
 int check_fatal_io_errno(void);
 int engine_stats(void);
-void host_ban(httrackp * opt, int ptr, struct_back * sback, const char *host);
-FILE *filecreate(filenote_strc * strct, const char *s);
-FILE *fileappend(filenote_strc * strct, const char *s);
-int filecreateempty(filenote_strc * strct, const char *filename);
-int filenote(filenote_strc * strct, const char *s, filecreate_params * params);
-void file_notify(httrackp * opt, const char *adr, const char *fil,
-                 const char *save, int create, int modify, int wasupdated);
-void usercommand(httrackp * opt, int exe, const char *cmd, const char *file,
-                 const char *adr, const char *fil);
-void usercommand_exe(const char *cmd, const char *file);
-int filters_init(char ***ptrfilters, int maxfilter, int filterinc);
+void host_ban(httrackp* opt, int ptr, struct_back* sback, const char* host);
+FILE* filecreate(filenote_strc* strct, const char* s);
+FILE* fileappend(filenote_strc* strct, const char* s);
+int filecreateempty(filenote_strc* strct, const char* filename);
+int filenote(filenote_strc* strct, const char* s, filecreate_params* params);
+void file_notify(httrackp* opt, const char* adr, const char* fil,
+	const char* save, int create, int modify, int wasupdated);
+void usercommand(httrackp* opt, int exe, const char* cmd, const char* file,
+	const char* adr, const char* fil);
+void usercommand_exe(const char* cmd, const char* file);
+int filters_init(char*** ptrfilters, int maxfilter, int filterinc);
 
-int fspc(httrackp * opt, FILE * fp, const char *type);
-char *next_token(char *p, int flag);
+int fspc(httrackp* opt, FILE* fp, const char* type);
+char* next_token(char* p, int flag);
 
 //
-char *readfile(const char *fil);
-char *readfile2(const char *fil, LLint * size);
-char *readfile_utf8(const char *fil);
-char *readfile_or(const char *fil, const char *defaultdata);
+char* readfile(const char* fil);
+char* readfile2(const char* fil, LLint* size);
+char* readfile_utf8(const char* fil);
+char* readfile_or(const char* fil, const char* defaultdata);
 
 #if 0
 void check_rate(TStamp stat_timestart, int maxrate);
 #endif
 
 // liens
-int liens_record(char *adr, char *fil, char *save, char *former_adr,
-                 char *former_fil, char *codebase);
+int liens_record(char* adr, char* fil, char* save, char* former_adr,
+	char* former_fil, char* codebase);
 
 // backing, routines externes
-int back_pluggable_sockets(struct_back * sback, httrackp * opt);
-int back_pluggable_sockets_strict(struct_back * sback, httrackp * opt);
-int back_fill(struct_back * sback, httrackp * opt, cache_back * cache,
-              int ptr, int numero_passe);
-int backlinks_done(const struct_back * sback, lien_url ** liens, 
-                   int lien_tot, int ptr);
-int back_fillmax(struct_back * sback, httrackp * opt, cache_back * cache,
-                 int ptr, int numero_passe);
+int back_pluggable_sockets(struct_back* sback, httrackp* opt);
+int back_pluggable_sockets_strict(struct_back* sback, httrackp* opt);
+int back_fill(struct_back* sback, httrackp* opt, cache_back* cache,
+	int ptr, int numero_passe);
+int backlinks_done(const struct_back* sback, lien_url** liens,
+	int lien_tot, int ptr);
+int back_fillmax(struct_back* sback, httrackp* opt, cache_back* cache,
+	int ptr, int numero_passe);
 
-int ask_continue(httrackp * opt);
+int ask_continue(httrackp* opt);
 int nombre_digit(int n);
 
 // Java
 #if 0
-int hts_add_file(char *file, int file_position);
+int hts_add_file(char* file, int file_position);
 #endif
 
 // Polling
 #if HTS_POLL
 int check_flot(T_SOC s);
 int check_stdin(void);
-int read_stdin(char *s, int max);
+int read_stdin(char* s, int max);
 #endif
 int check_sockerror(T_SOC s);
 int check_sockdata(T_SOC s);
 
 /* external modules */
-int htsAddLink(htsmoduleStruct * str, char *link);
+int htsAddLink(htsmoduleStruct* str, char* link);
 
 // Void
 void voidf(void);

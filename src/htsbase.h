@@ -63,7 +63,7 @@ extern "C" {
 #endif
 #include <assert.h>
 
-/* GCC extension */
+	/* GCC extension */
 #ifndef HTS_UNUSED
 #ifdef __GNUC__
 #define HTS_UNUSED __attribute__ ((unused))

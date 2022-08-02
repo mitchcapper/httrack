@@ -96,9 +96,9 @@ typedef struct lien_adrfilsave lien_adrfilsave;
 #else
 #define MSVC2003INLINEBUG
 #endif
-MSVC2003INLINEBUG HTS_STATIC char *getHtsOptBuff_(httrackp * opt) {
-  opt->state.concat.index = (opt->state.concat.index + 1) % 16;
-  return opt->state.concat.buff[opt->state.concat.index];
+MSVC2003INLINEBUG HTS_STATIC char* getHtsOptBuff_(httrackp* opt) {
+	opt->state.concat.index = (opt->state.concat.index + 1) % 16;
+	return opt->state.concat.buff[opt->state.concat.index];
 }
 
 #undef MSVC2003INLINEBUG
@@ -111,9 +111,9 @@ MSVC2003INLINEBUG HTS_STATIC char *getHtsOptBuff_(httrackp * opt) {
 typedef struct OLD_t_proxy OLD_t_proxy;
 #endif
 struct OLD_t_proxy {
-  int active;
-  char name[1024];
-  int port;
+	int active;
+	char name[1024];
+	int port;
 };
 
 #ifndef HTS_DEF_FWSTRUCT_OLD_htsblk
@@ -121,23 +121,23 @@ struct OLD_t_proxy {
 typedef struct OLD_htsblk OLD_htsblk;
 #endif
 struct OLD_htsblk {
-  int statuscode;               // ANCIENNE STURCTURE - status-code, -1=erreur, 200=OK,201=..etc (cf RFC1945)
-  int notmodified;              // ANCIENNE STURCTURE - page ou fichier NON modifié (transféré)
-  int is_write;                 // ANCIENNE STURCTURE - sortie sur disque (out) ou en mémoire (adr)
-  char *adr;                    // ANCIENNE STURCTURE - adresse du bloc de mémoire, NULL=vide
-  FILE *out;                    // ANCIENNE STURCTURE - écriture directe sur disque (si is_write=1)
-  int size;                     // ANCIENNE STURCTURE - taille fichier
-  char msg[80];                 // ANCIENNE STURCTURE - message éventuel si échec ("\0"=non précisé)
-  char contenttype[64];         // ANCIENNE STURCTURE - content-type ("text/html" par exemple)
-  char *location;               // ANCIENNE STURCTURE - on copie dedans éventuellement la véritable 'location'
-  int totalsize;                // ANCIENNE STURCTURE - taille totale à télécharger (-1=inconnue)
-  int is_file;                  // ANCIENNE STURCTURE - ce n'est pas une socket mais un descripteur de fichier si 1
-  T_SOC soc;                    // ANCIENNE STURCTURE - ID socket
-  FILE *fp;                     // ANCIENNE STURCTURE - fichier pour file://
-  OLD_t_proxy proxy;            // ANCIENNE STURCTURE - proxy
-  int user_agent_send;          // ANCIENNE STURCTURE - user agent (ex: httrack/1.0 [sun])
-  char user_agent[64];
-  int http11;                   // ANCIENNE STURCTURE - l'en tête doit être signé HTTP/1.1 et non HTTP/1.0
+	int statuscode;               // ANCIENNE STURCTURE - status-code, -1=erreur, 200=OK,201=..etc (cf RFC1945)
+	int notmodified;              // ANCIENNE STURCTURE - page ou fichier NON modifié (transféré)
+	int is_write;                 // ANCIENNE STURCTURE - sortie sur disque (out) ou en mémoire (adr)
+	char* adr;                    // ANCIENNE STURCTURE - adresse du bloc de mémoire, NULL=vide
+	FILE* out;                    // ANCIENNE STURCTURE - écriture directe sur disque (si is_write=1)
+	int size;                     // ANCIENNE STURCTURE - taille fichier
+	char msg[80];                 // ANCIENNE STURCTURE - message éventuel si échec ("\0"=non précisé)
+	char contenttype[64];         // ANCIENNE STURCTURE - content-type ("text/html" par exemple)
+	char* location;               // ANCIENNE STURCTURE - on copie dedans éventuellement la véritable 'location'
+	int totalsize;                // ANCIENNE STURCTURE - taille totale à télécharger (-1=inconnue)
+	int is_file;                  // ANCIENNE STURCTURE - ce n'est pas une socket mais un descripteur de fichier si 1
+	T_SOC soc;                    // ANCIENNE STURCTURE - ID socket
+	FILE* fp;                     // ANCIENNE STURCTURE - fichier pour file://
+	OLD_t_proxy proxy;            // ANCIENNE STURCTURE - proxy
+	int user_agent_send;          // ANCIENNE STURCTURE - user agent (ex: httrack/1.0 [sun])
+	char user_agent[64];
+	int http11;                   // ANCIENNE STURCTURE - l'en tête doit être signé HTTP/1.1 et non HTTP/1.0
 };
 
 /* fin ANCIENNE STURCTURE pour cache 1.0 */
@@ -148,26 +148,26 @@ struct OLD_htsblk {
 typedef struct t_dnscache t_dnscache;
 #endif
 struct t_dnscache {
-  struct t_dnscache *next;
-  const char *iadr;
-  size_t host_length;                   // length ; (4 or 16) ; 0 for error
-  char host_addr[HTS_MAXADDRLEN];
+	struct t_dnscache* next;
+	const char* iadr;
+	size_t host_length;                   // length ; (4 or 16) ; 0 for error
+	char host_addr[HTS_MAXADDRLEN];
 };
 
 /* Library internal definictions */
 #ifdef HTS_INTERNAL_BYTECODE
 
 // initialize an htsblk structure
-void hts_init_htsblk(htsblk * r);
+void hts_init_htsblk(htsblk* r);
 
 // attach specific project log to hachtable logger
-void hts_set_hash_handler(coucal hashtable, httrackp *opt);
+void hts_set_hash_handler(coucal hashtable, httrackp* opt);
 
 // version
 HTSEXT_API const char* hts_version(void);
 
 // fonctions unix/winsock
-int hts_read(htsblk * r, char *buff, int size);
+int hts_read(htsblk* r, char* buff, int size);
 
 //int HTS_TOTAL_RECV_CHECK(int var);
 LLint check_downloadable_bytes(int rate);
@@ -175,147 +175,147 @@ LLint check_downloadable_bytes(int rate);
 HTSEXT_API int hts_uninit_module(void);
 
 // fonctions principales
-T_SOC http_fopen(httrackp * opt, const char *adr, const char *fil, htsblk * retour);
-T_SOC http_xfopen(httrackp * opt, int mode, int treat, int waitconnect,
-                  const char *xsend, const char *adr, const char *fil, htsblk * retour);
-int http_sendhead(httrackp * opt, t_cookie * cookie, int mode, const char *xsend,
-                  const char *adr, const char *fil,
-                  const char *referer_adr, const char *referer_fil,
-                  htsblk * retour);
+T_SOC http_fopen(httrackp* opt, const char* adr, const char* fil, htsblk* retour);
+T_SOC http_xfopen(httrackp* opt, int mode, int treat, int waitconnect,
+	const char* xsend, const char* adr, const char* fil, htsblk* retour);
+int http_sendhead(httrackp* opt, t_cookie* cookie, int mode, const char* xsend,
+	const char* adr, const char* fil,
+	const char* referer_adr, const char* referer_fil,
+	htsblk* retour);
 
 //int newhttp(char* iadr,char* err=NULL);
-T_SOC newhttp(httrackp * opt, const char *iadr, htsblk * retour, int port,
-              int waitconnect);
-HTS_INLINE void deletehttp(htsblk * r);
-HTS_INLINE int deleteaddr(htsblk * r);
+T_SOC newhttp(httrackp* opt, const char* iadr, htsblk* retour, int port,
+	int waitconnect);
+HTS_INLINE void deletehttp(htsblk* r);
+HTS_INLINE int deleteaddr(htsblk* r);
 HTS_INLINE void deletesoc(T_SOC soc);
-HTS_INLINE void deletesoc_r(htsblk * r);
-htsblk http_test(httrackp * opt, const char *adr, const char *fil, char *loc);
-int check_readinput(htsblk * r);
+HTS_INLINE void deletesoc_r(htsblk* r);
+htsblk http_test(httrackp* opt, const char* adr, const char* fil, char* loc);
+int check_readinput(htsblk* r);
 int check_readinput_t(T_SOC soc, int timeout);
-void treathead(t_cookie * cookie, const char *adr, const char *fil, htsblk * retour,
-               char *rcvd);
-void treatfirstline(htsblk * retour, const char *rcvd);
+void treathead(t_cookie* cookie, const char* adr, const char* fil, htsblk* retour,
+	char* rcvd);
+void treatfirstline(htsblk* retour, const char* rcvd);
 
 // sous-fonctions
-LLint http_xfread1(htsblk * r, int bufl);
-HTS_INLINE SOCaddr* hts_dns_resolve2(httrackp * opt, const char *iadr,
-                                     SOCaddr *const addr,
-                                     const char **error);
-HTS_INLINE SOCaddr* hts_dns_resolve(httrackp * opt, const char *iadr,
-                                    SOCaddr *const addr);
-HTSEXT_API SOCaddr* hts_dns_resolve_nocache2(const char *const hostname,
-                                              SOCaddr *const addr,
-                                              const char **error);
-HTSEXT_API SOCaddr* hts_dns_resolve_nocache(const char *const hostname,
-                                             SOCaddr *const addr);
-HTSEXT_API int check_hostname_dns(const char *const hostname);
+LLint http_xfread1(htsblk* r, int bufl);
+HTS_INLINE SOCaddr* hts_dns_resolve2(httrackp* opt, const char* iadr,
+	SOCaddr* const addr,
+	const char** error);
+HTS_INLINE SOCaddr* hts_dns_resolve(httrackp* opt, const char* iadr,
+	SOCaddr* const addr);
+HTSEXT_API SOCaddr* hts_dns_resolve_nocache2(const char* const hostname,
+	SOCaddr* const addr,
+	const char** error);
+HTSEXT_API SOCaddr* hts_dns_resolve_nocache(const char* const hostname,
+	SOCaddr* const addr);
+HTSEXT_API int check_hostname_dns(const char* const hostname);
 
 int ftp_available(void);
 
 #if HTS_DNSCACHE
-void hts_cache_free(t_dnscache *const cache);
-t_dnscache *hts_cache(httrackp * opt);
+void hts_cache_free(t_dnscache* const cache);
+t_dnscache* hts_cache(httrackp* opt);
 #endif
 
 // outils divers
 HTS_INLINE TStamp time_local(void);
 
-void sec2str(char *s, TStamp t);
+void sec2str(char* s, TStamp t);
 
-void time_gmt_rfc822(char *s);
-void time_local_rfc822(char *s);
-struct tm *convert_time_rfc822(struct tm *buffer, const char *s);
-int set_filetime(const char *file, struct tm *tm_time);
-int set_filetime_rfc822(const char *file, const char *date);
-int get_filetime_rfc822(const char *file, char *date);
-HTS_INLINE void time_rfc822(char *s, struct tm *A);
-HTS_INLINE void time_rfc822_local(char *s, struct tm *A);
+void time_gmt_rfc822(char* s);
+void time_local_rfc822(char* s);
+struct tm* convert_time_rfc822(struct tm* buffer, const char* s);
+int set_filetime(const char* file, struct tm* tm_time);
+int set_filetime_rfc822(const char* file, const char* date);
+int get_filetime_rfc822(const char* file, char* date);
+HTS_INLINE void time_rfc822(char* s, struct tm* A);
+HTS_INLINE void time_rfc822_local(char* s, struct tm* A);
 
-HTS_INLINE int sendc(htsblk * r, const char *s);
-int finput(T_SOC fd, char *s, int max);
-int binput(char *buff, char *s, int max);
-int linput(FILE * fp, char *s, int max);
-int linputsoc(T_SOC soc, char *s, int max);
-int linputsoc_t(T_SOC soc, char *s, int max, int timeout);
-int linput_trim(FILE * fp, char *s, int max);
-int linput_cpp(FILE * fp, char *s, int max);
-void rawlinput(FILE * fp, char *s, int max);
-const char *strstrcase(const char *s, const char *o);
-int ident_url_absolute(const char *url, lien_adrfil *adrfil);
-void fil_simplifie(char *f);
-int is_unicode_utf8(const char *buffer, const size_t size);
-void map_characters(unsigned char *buffer, unsigned int size,
-                    unsigned int *map);
-int ishtml(httrackp * opt, const char *urlfil);
-int ishtml_ext(const char *a);
+HTS_INLINE int sendc(htsblk* r, const char* s);
+int finput(T_SOC fd, char* s, int max);
+int binput(char* buff, char* s, int max);
+int linput(FILE* fp, char* s, int max);
+int linputsoc(T_SOC soc, char* s, int max);
+int linputsoc_t(T_SOC soc, char* s, int max, int timeout);
+int linput_trim(FILE* fp, char* s, int max);
+int linput_cpp(FILE* fp, char* s, int max);
+void rawlinput(FILE* fp, char* s, int max);
+const char* strstrcase(const char* s, const char* o);
+int ident_url_absolute(const char* url, lien_adrfil* adrfil);
+void fil_simplifie(char* f);
+int is_unicode_utf8(const char* buffer, const size_t size);
+void map_characters(unsigned char* buffer, unsigned int size,
+	unsigned int* map);
+int ishtml(httrackp* opt, const char* urlfil);
+int ishtml_ext(const char* a);
 int ishttperror(int err);
 
-int get_userhttptype(httrackp * opt, char *s, const char *fil);
-void give_mimext(char *s, const char *st);
+int get_userhttptype(httrackp* opt, char* s, const char* fil);
+void give_mimext(char* s, const char* st);
 
-int may_bogus_multiple(httrackp * opt, const char *mime, const char *filename);
-int may_unknown2(httrackp * opt, const char *mime, const char *filename);
+int may_bogus_multiple(httrackp* opt, const char* mime, const char* filename);
+int may_unknown2(httrackp* opt, const char* mime, const char* filename);
 
-const char *strrchr_limit(const char *s, char c, const char *limit);
-char *jump_protocol(char *source);
-const char *jump_protocol_const(const char *source);
-void code64(unsigned char *a, int size_a, unsigned char *b, int crlf);
+const char* strrchr_limit(const char* s, char c, const char* limit);
+char* jump_protocol(char* source);
+const char* jump_protocol_const(const char* source);
+void code64(unsigned char* a, int size_a, unsigned char* b, int crlf);
 
 #define copychar(catbuff,a) concat(catbuff,(a),NULL)
 
-char *convtolower(char *catbuff, const char *a);
-void hts_lowcase(char *s);
-void hts_replace(char *s, char from, char to);
-int multipleStringMatch(const char *s, const char *match);
+char* convtolower(char* catbuff, const char* a);
+void hts_lowcase(char* s);
+void hts_replace(char* s, char from, char to);
+int multipleStringMatch(const char* s, const char* match);
 
-void fprintfio(FILE * fp, const char *buff, const char *prefix);
+void fprintfio(FILE* fp, const char* buff, const char* prefix);
 
 #ifdef _WIN32
 #else
 int sig_ignore_flag(int setflag);  // flag ignore
 #endif
 
-void cut_path(char *fullpath, char *path, char *pname);
-int fexist(const char *s);
-int fexist_utf8(const char *s);
+void cut_path(char* fullpath, char* path, char* pname);
+int fexist(const char* s);
+int fexist_utf8(const char* s);
 
 /*LLint fsize(const char* s);    */
-off_t fpsize(FILE * fp);
-off_t fsize(const char *s);
-off_t fsize_utf8(const char *s);
+off_t fpsize(FILE* fp);
+off_t fsize(const char* s);
+off_t fsize_utf8(const char* s);
 
 // Threads
-typedef void *(*beginthread_type) (void *);
+typedef void* (*beginthread_type) (void*);
 
 /*unsigned long _beginthread( beginthread_type start_address, unsigned stack_size, void *arglist );*/
 
 /* variables globales */
 extern HTSEXT_API hts_stat_struct HTS_STAT;
 extern int _DEBUG_HEAD;
-extern FILE *ioinfo;
+extern FILE* ioinfo;
 
 /* constantes */
-extern const char *hts_mime_keep[];
-extern const char *hts_mime[][2];
-extern const char *hts_main_mime[];
-extern const char *hts_detect[];
-extern const char *hts_detectbeg[];
-extern const char *hts_nodetect[];
-extern const char *hts_detectURL[];
-extern const char *hts_detectandleave[];
-extern const char *hts_detect_js[];
+extern const char* hts_mime_keep[];
+extern const char* hts_mime[][2];
+extern const char* hts_main_mime[];
+extern const char* hts_detect[];
+extern const char* hts_detectbeg[];
+extern const char* hts_nodetect[];
+extern const char* hts_detectURL[];
+extern const char* hts_detectandleave[];
+extern const char* hts_detect_js[];
 
 // htsmodule.c definitions
-extern void *openFunctionLib(const char *file_);
-extern void *getFunctionPtr(void *handle, const char *fncname);
-extern void closeFunctionLib(void *handle);
+extern void* openFunctionLib(const char* file_);
+extern void* getFunctionPtr(void* handle, const char* fncname);
+extern void closeFunctionLib(void* handle);
 
-extern void clearCallbacks(htscallbacks * chain);
-int hts_set_callback(t_hts_htmlcheck_callbacks * callbacks,
-                     const char *name, void *function);
-void *hts_get_callback(t_hts_htmlcheck_callbacks * callbacks,
-                       const char *name);
+extern void clearCallbacks(htscallbacks* chain);
+int hts_set_callback(t_hts_htmlcheck_callbacks* callbacks,
+	const char* name, void* function);
+void* hts_get_callback(t_hts_htmlcheck_callbacks* callbacks,
+	const char* name);
 
 #define CBSTRUCT(OPT) ((t_hts_htmlcheck_callbacks*) ((OPT)->callbacks_fun))
 #define GET_USERCALLBACK(OPT, NAME) ( CBSTRUCT(OPT)-> NAME .fun )
@@ -346,12 +346,12 @@ void *hts_get_callback(t_hts_htmlcheck_callbacks * callbacks,
 /*
 #define GET_CALLBACK(OPT, NAME, ARG) ( \
   ( \
-    ( ARG ) = GET_USERDEF(OPT, NAME), \
-    ( \
- 	    (CBSTRUCT(OPT) != NULL && CBSTRUCT(OPT)-> NAME .fun != NULL) \
-	    ? ( GET_USERCALLBACK(OPT, NAME ) ) \
-      : ( default_callbacks. NAME .fun ) \
-    ) \
+	( ARG ) = GET_USERDEF(OPT, NAME), \
+	( \
+		(CBSTRUCT(OPT) != NULL && CBSTRUCT(OPT)-> NAME .fun != NULL) \
+		? ( GET_USERCALLBACK(OPT, NAME ) ) \
+	  : ( default_callbacks. NAME .fun ) \
+	) \
   ) \
 )
 */
@@ -360,35 +360,35 @@ void *hts_get_callback(t_hts_htmlcheck_callbacks * callbacks,
 #ifndef HTS_DEF_FILEAPI
 #ifdef _WIN32
 #define FOPEN hts_fopen_utf8
-     HTSEXT_API FILE *hts_fopen_utf8(const char *path, const char *mode);
+HTSEXT_API FILE* hts_fopen_utf8(const char* path, const char* mode);
 
 #define STAT hts_stat_utf8
-     typedef struct _stat STRUCT_STAT;
-     HTSEXT_API int hts_stat_utf8(const char *path, STRUCT_STAT * buf);
+typedef struct _stat STRUCT_STAT;
+HTSEXT_API int hts_stat_utf8(const char* path, STRUCT_STAT* buf);
 
 #define UNLINK hts_unlink_utf8
-     HTSEXT_API int hts_unlink_utf8(const char *pathname);
+HTSEXT_API int hts_unlink_utf8(const char* pathname);
 
 #define RENAME hts_rename_utf8
-     HTSEXT_API int hts_rename_utf8(const char *oldpath, const char *newpath);
+HTSEXT_API int hts_rename_utf8(const char* oldpath, const char* newpath);
 
 #define MKDIR(F) hts_mkdir_utf8(F)
-     HTSEXT_API int hts_mkdir_utf8(const char *pathname);
+HTSEXT_API int hts_mkdir_utf8(const char* pathname);
 
 #define UTIME(A,B) hts_utime_utf8(A,B)
-     typedef struct _utimbuf STRUCT_UTIMBUF;
-     HTSEXT_API int hts_utime_utf8(const char *filename,
-                                   const STRUCT_UTIMBUF * times);
+typedef struct _utimbuf STRUCT_UTIMBUF;
+HTSEXT_API int hts_utime_utf8(const char* filename,
+	const STRUCT_UTIMBUF* times);
 #else
 /* The underlying filesystem charset is supposed to be UTF-8 */
 #define FOPEN fopen
 #define STAT stat
-     typedef struct stat STRUCT_STAT;
+typedef struct stat STRUCT_STAT;
 
 #define UNLINK unlink
 #define RENAME rename
 #define MKDIR(F) mkdir(F, HTS_ACCESS_FOLDER)
-     typedef struct utimbuf STRUCT_UTIMBUF;
+typedef struct utimbuf STRUCT_UTIMBUF;
 
 #define UTIME(A,B) utime(A,B)
 #endif
@@ -428,30 +428,30 @@ void *hts_get_callback(t_hts_htmlcheck_callbacks * callbacks,
 
 // compare le début de f avec s et retourne la position de la fin
 // 'A=a' (case insensitive)
-HTS_STATIC int strfield(const char *f, const char *s) {
-  int r = 0;
+HTS_STATIC int strfield(const char* f, const char* s) {
+	int r = 0;
 
-  while(streql(*f, *s) && ((*f) != 0) && ((*s) != 0)) {
-    f++;
-    s++;
-    r++;
-  }
-  if (*s == 0)
-    return r;
-  else
-    return 0;
+	while (streql(*f, *s) && ((*f) != 0) && ((*s) != 0)) {
+		f++;
+		s++;
+		r++;
+	}
+	if (*s == 0)
+		return r;
+	else
+		return 0;
 }
 
-HTS_STATIC int strcmpnocase(const char *a, const char *b) {
-  while(*a) {
-    int cmp = hichar(*a) - hichar(*b);
+HTS_STATIC int strcmpnocase(const char* a, const char* b) {
+	while (*a) {
+		int cmp = hichar(*a) - hichar(*b);
 
-    if (cmp != 0)
-      return cmp;
-    a++;
-    b++;
-  }
-  return 0;
+		if (cmp != 0)
+			return cmp;
+		a++;
+		b++;
+	}
+	return 0;
 }
 
 #define strfield2(f,s) ( (strlen(f)!=strlen(s)) ? 0 : (strfield(f,s)) )
@@ -485,81 +485,81 @@ HTS_STATIC int strcmpnocase(const char *a, const char *b) {
 #ifdef HTS_INTERNAL_BYTECODE
 
 // check if (mime, file) is hypertext
-HTS_STATIC int is_hypertext_mime(httrackp * opt, const char *mime,
-                                 const char *file) {
-  if (is_hypertext_mime__(mime))
-    return 1;
-  if (may_unknown(opt, mime)) {
-    char guessed[256];
+HTS_STATIC int is_hypertext_mime(httrackp* opt, const char* mime,
+	const char* file) {
+	if (is_hypertext_mime__(mime))
+		return 1;
+	if (may_unknown(opt, mime)) {
+		char guessed[256];
 
-    guessed[0] = '\0';
-    guess_httptype(opt, guessed, file);
-    return is_hypertext_mime__(guessed);
-  }
-  return 0;
+		guessed[0] = '\0';
+		guess_httptype(opt, guessed, file);
+		return is_hypertext_mime__(guessed);
+	}
+	return 0;
 }
 
 // check if (mime, file) might be "false" hypertext
-HTS_STATIC int may_be_hypertext_mime(httrackp * opt, const char *mime,
-                                     const char *file) {
-  if (may_be_hypertext_mime__(mime))
-    return 1;
-  if (file != NULL && file[0] != '\0' && may_unknown(opt, mime)) {
-    char guessed[256];
+HTS_STATIC int may_be_hypertext_mime(httrackp* opt, const char* mime,
+	const char* file) {
+	if (may_be_hypertext_mime__(mime))
+		return 1;
+	if (file != NULL && file[0] != '\0' && may_unknown(opt, mime)) {
+		char guessed[256];
 
-    guessed[0] = '\0';
-    guess_httptype(opt, guessed, file);
-    return may_be_hypertext_mime__(guessed);
-  }
-  return 0;
+		guessed[0] = '\0';
+		guess_httptype(opt, guessed, file);
+		return may_be_hypertext_mime__(guessed);
+	}
+	return 0;
 }
 
 // compare (mime, file) with reference
-HTS_STATIC int compare_mime(httrackp * opt, const char *mime, const char *file,
-                            const char *reference) {
-  if (is_hypertext_mime__(mime) || may_be_hypertext_mime__(mime))
-    return strfield2(mime, reference);
-  if (file != NULL && file[0] != '\0' && may_unknown(opt, mime)) {
-    char guessed[256];
+HTS_STATIC int compare_mime(httrackp* opt, const char* mime, const char* file,
+	const char* reference) {
+	if (is_hypertext_mime__(mime) || may_be_hypertext_mime__(mime))
+		return strfield2(mime, reference);
+	if (file != NULL && file[0] != '\0' && may_unknown(opt, mime)) {
+		char guessed[256];
 
-    guessed[0] = '\0';
-    guess_httptype(opt, guessed, file);
-    return strfield2(guessed, reference);
-  }
-  return 0;
+		guessed[0] = '\0';
+		guess_httptype(opt, guessed, file);
+		return strfield2(guessed, reference);
+	}
+	return 0;
 }
 
 #endif
 
 // returns (size_t) -1 upon error
 static HTS_UNUSED size_t off_t_to_size_t(off_t o) {
-  const size_t so = (size_t) o;
-  if ((off_t) so == o) {
-    return so;
-  } else {
-    return (size_t) -1;
-  }
+	const size_t so = (size_t)o;
+	if ((off_t)so == o) {
+		return so;
+	} else {
+		return (size_t)-1;
+	}
 }
 
 /* dirent() compatibility */
 #ifdef _WIN32
 #define HTS_DIRENT_SIZE 256
 struct dirent {
-  ino_t d_ino;                  /* ignored */
-  off_t d_off;                  /* ignored */
-  unsigned short d_reclen;      /* ignored */
-  unsigned char d_type;         /* ignored */
-  char d_name[HTS_DIRENT_SIZE]; /* filename */
+	ino_t d_ino;                  /* ignored */
+	off_t d_off;                  /* ignored */
+	unsigned short d_reclen;      /* ignored */
+	unsigned char d_type;         /* ignored */
+	char d_name[HTS_DIRENT_SIZE]; /* filename */
 };
 typedef struct DIR DIR;
 struct DIR {
-  HANDLE h;
-  struct dirent entry;
-  char *name;
+	HANDLE h;
+	struct dirent entry;
+	char* name;
 };
-DIR *opendir(const char *name);
-struct dirent *readdir(DIR * dir);
-int closedir(DIR * dir);
+DIR* opendir(const char* name);
+struct dirent* readdir(DIR* dir);
+int closedir(DIR* dir);
 #endif
 
 #endif

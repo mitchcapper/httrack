@@ -42,19 +42,19 @@ Please visit our Website: http://www.httrack.com
 typedef struct t_StatsBuffer t_StatsBuffer;
 #endif
 struct t_StatsBuffer {
-  char name[1024];
-  char file[1024];
-  char state[256];
-  char BIGSTK url_sav[HTS_URLMAXSIZE * 2];      // pour cancel
-  char BIGSTK url_adr[HTS_URLMAXSIZE * 2];
-  char BIGSTK url_fil[HTS_URLMAXSIZE * 2];
-  LLint size;
-  LLint sizetot;
-  int offset;
-  //
-  int back;
-  //
-  int actived;                  // pour disabled
+	char name[1024];
+	char file[1024];
+	char state[256];
+	char BIGSTK url_sav[HTS_URLMAXSIZE * 2];      // pour cancel
+	char BIGSTK url_adr[HTS_URLMAXSIZE * 2];
+	char BIGSTK url_fil[HTS_URLMAXSIZE * 2];
+	LLint size;
+	LLint sizetot;
+	int offset;
+	//
+	int back;
+	//
+	int actived;                  // pour disabled
 };
 
 #ifndef HTS_DEF_FWSTRUCT_t_InpInfo
@@ -62,28 +62,28 @@ struct t_StatsBuffer {
 typedef struct t_InpInfo t_InpInfo;
 #endif
 struct t_InpInfo {
-  int ask_refresh;
-  int refresh;
-  LLint stat_bytes;
-  int stat_time;
-  int lien_n;
-  int lien_tot;
-  int stat_nsocket;
-  int rate;
-  int irate;
-  int ft;
-  LLint stat_written;
-  int stat_updated;
-  int stat_errors;
-  int stat_warnings;
-  int stat_infos;
-  TStamp stat_timestart;
-  int stat_back;
+	int ask_refresh;
+	int refresh;
+	LLint stat_bytes;
+	int stat_time;
+	int lien_n;
+	int lien_tot;
+	int stat_nsocket;
+	int rate;
+	int irate;
+	int ft;
+	LLint stat_written;
+	int stat_updated;
+	int stat_errors;
+	int stat_warnings;
+	int stat_infos;
+	TStamp stat_timestart;
+	int stat_back;
 };
 
-int main(int argc, char **argv);
+int main(int argc, char** argv);
 #endif
 
 extern HTSEXT_API hts_stat_struct HTS_STAT;
 extern int _DEBUG_HEAD;
-extern FILE *ioinfo;
+extern FILE* ioinfo;

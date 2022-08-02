@@ -48,20 +48,20 @@ static int process_chain = 0;
 static htsmutex process_chain_mutex = HTSMUTEX_INIT;
 
 HTSEXT_API void htsthread_wait(void) {
-  htsthread_wait_n(0);
+	htsthread_wait_n(0);
 }
 
 HTSEXT_API void htsthread_wait_n(int n_wait) {
 #if USE_BEGINTHREAD
-  int wait = 0;
+	int wait = 0;
 
-  do {
-    hts_mutexlock(&process_chain_mutex);
-    wait = (process_chain > n_wait);
-    hts_mutexrelease(&process_chain_mutex);
-    if (wait)
-      Sleep(100);
-  } while(wait);
+	do {
+		hts_mutexlock(&process_chain_mutex);
+		wait = (process_chain > n_wait);
+		hts_mutexrelease(&process_chain_mutex);
+		if (wait)
+			Sleep(100);
+	} while (wait);
 #endif
 }
 
@@ -69,148 +69,148 @@ HTSEXT_API void htsthread_wait_n(int n_wait) {
 HTSEXT_API void htsthread_init(void) {
 #if USE_BEGINTHREAD
 #if (defined(_DEBUG) || defined(DEBUG))
-  assertf(process_chain == 0);
+	assertf(process_chain == 0);
 #endif
-  if (process_chain_mutex == HTSMUTEX_INIT) {
-    hts_mutexinit(&process_chain_mutex);
-  }
+	if (process_chain_mutex == HTSMUTEX_INIT) {
+		hts_mutexinit(&process_chain_mutex);
+	}
 #endif
 }
 
 HTSEXT_API void htsthread_uninit(void) {
-  htsthread_wait();
+	htsthread_wait();
 #if USE_BEGINTHREAD
-  hts_mutexfree(&process_chain_mutex);
+	hts_mutexfree(&process_chain_mutex);
 #endif
 }
 
 typedef struct hts_thread_s {
-  void *arg;
-  void (*fun) (void *arg);
+	void* arg;
+	void (*fun) (void* arg);
 } hts_thread_s;
 
 #ifdef _WIN32
-static unsigned int __stdcall hts_entry_point(void *tharg)
+static unsigned int __stdcall hts_entry_point(void* tharg)
 #else
-static void *hts_entry_point(void *tharg)
+static void* hts_entry_point(void* tharg)
 #endif
 {
-  hts_thread_s *s_args = (hts_thread_s *) tharg;
-  void *const arg = s_args->arg;
-  void (*fun) (void *arg) = s_args->fun;
+	hts_thread_s* s_args = (hts_thread_s*)tharg;
+	void* const arg = s_args->arg;
+	void (*fun) (void* arg) = s_args->fun;
 
-  free(tharg);
+	free(tharg);
 
-  hts_mutexlock(&process_chain_mutex);
-  process_chain++;
-  assertf(process_chain > 0);
-  hts_mutexrelease(&process_chain_mutex);
+	hts_mutexlock(&process_chain_mutex);
+	process_chain++;
+	assertf(process_chain > 0);
+	hts_mutexrelease(&process_chain_mutex);
 
-  /* run */
-  fun(arg);
+	/* run */
+	fun(arg);
 
-  hts_mutexlock(&process_chain_mutex);
-  process_chain--;
-  assertf(process_chain >= 0);
-  hts_mutexrelease(&process_chain_mutex);
+	hts_mutexlock(&process_chain_mutex);
+	process_chain--;
+	assertf(process_chain >= 0);
+	hts_mutexrelease(&process_chain_mutex);
 #ifdef _WIN32
-  return 0;
+	return 0;
 #else
-  return NULL;
+	return NULL;
 #endif
 }
 
 /* create a thread */
-HTSEXT_API int hts_newthread(void (*fun) (void *arg), void *arg) {
-  hts_thread_s *s_args = malloc(sizeof(hts_thread_s));
+HTSEXT_API int hts_newthread(void (*fun) (void* arg), void* arg) {
+	hts_thread_s* s_args = malloc(sizeof(hts_thread_s));
 
-  assertf(s_args != NULL);
-  s_args->arg = arg;
-  s_args->fun = fun;
+	assertf(s_args != NULL);
+	s_args->arg = arg;
+	s_args->fun = fun;
 #ifdef _WIN32
-  {
-    unsigned int idt;
-    HANDLE handle =
-      (HANDLE) _beginthreadex(NULL, 0, hts_entry_point, s_args, 0, &idt);
-    if (handle == 0) {
-      free(s_args);
-      return -1;
-    } else {
-      /* detach the thread from the main process so that is can be independent */
-      CloseHandle(handle);
-    }
-  }
+	{
+		unsigned int idt;
+		HANDLE handle =
+			(HANDLE)_beginthreadex(NULL, 0, hts_entry_point, s_args, 0, &idt);
+		if (handle == 0) {
+			free(s_args);
+			return -1;
+		} else {
+			/* detach the thread from the main process so that is can be independent */
+			CloseHandle(handle);
+		}
+	}
 #else
-  {
-    const size_t stackSize = 1024 * 1024 * 8;
-    pthread_attr_t attr;
-    pthread_t handle = 0;
-    int retcode;
+	{
+		const size_t stackSize = 1024 * 1024 * 8;
+		pthread_attr_t attr;
+		pthread_t handle = 0;
+		int retcode;
 
-    if (pthread_attr_init(&attr) != 0
-        || pthread_attr_setstacksize(&attr, stackSize) != 0
-        || (retcode =
-            pthread_create(&handle, &attr, hts_entry_point, s_args)) != 0) {
-      free(s_args);
-      return -1;
-    } else {
-      /* detach the thread from the main process so that is can be independent */
-      pthread_detach(handle);
-      pthread_attr_destroy(&attr);
-    }
-  }
+		if (pthread_attr_init(&attr) != 0
+			|| pthread_attr_setstacksize(&attr, stackSize) != 0
+			|| (retcode =
+				pthread_create(&handle, &attr, hts_entry_point, s_args)) != 0) {
+			free(s_args);
+			return -1;
+		} else {
+			/* detach the thread from the main process so that is can be independent */
+			pthread_detach(handle);
+			pthread_attr_destroy(&attr);
+		}
+	}
 #endif
-  return 0;
+	return 0;
 }
 
 #if USE_BEGINTHREAD
 
 /* Note: new 3.41 cleaned up functions. */
 
-HTSEXT_API void hts_mutexinit(htsmutex * mutex) {
-  htsmutex_s *smutex = malloct(sizeof(htsmutex_s));
+HTSEXT_API void hts_mutexinit(htsmutex* mutex) {
+	htsmutex_s* smutex = malloct(sizeof(htsmutex_s));
 
 #ifdef _WIN32
-  smutex->handle = CreateMutex(NULL, FALSE, NULL);
+	smutex->handle = CreateMutex(NULL, FALSE, NULL);
 #else
-  pthread_mutex_init(&smutex->handle, 0);
+	pthread_mutex_init(&smutex->handle, 0);
 #endif
-  *mutex = smutex;
+	* mutex = smutex;
 }
 
-HTSEXT_API void hts_mutexfree(htsmutex * mutex) {
-  if (mutex != NULL && *mutex != NULL) {
+HTSEXT_API void hts_mutexfree(htsmutex* mutex) {
+	if (mutex != NULL && *mutex != NULL) {
 #ifdef _WIN32
-    CloseHandle((*mutex)->handle);
+		CloseHandle((*mutex)->handle);
 #else
-    pthread_mutex_destroy(&((*mutex)->handle));
+		pthread_mutex_destroy(&((*mutex)->handle));
 #endif
-    freet(*mutex);
-    *mutex = NULL;
-  }
+		freet(*mutex);
+		*mutex = NULL;
+	}
 }
 
-HTSEXT_API void hts_mutexlock(htsmutex * mutex) {
-  assertf(mutex != NULL);
-  if (*mutex == HTSMUTEX_INIT) {        /* must be initialized */
-    hts_mutexinit(mutex);
-  }
-  assertf(*mutex != NULL);
+HTSEXT_API void hts_mutexlock(htsmutex* mutex) {
+	assertf(mutex != NULL);
+	if (*mutex == HTSMUTEX_INIT) {        /* must be initialized */
+		hts_mutexinit(mutex);
+	}
+	assertf(*mutex != NULL);
 #ifdef _WIN32
-  assertf((*mutex)->handle != NULL);
-  WaitForSingleObject((*mutex)->handle, INFINITE);
+	assertf((*mutex)->handle != NULL);
+	WaitForSingleObject((*mutex)->handle, INFINITE);
 #else
-  pthread_mutex_lock(&(*mutex)->handle);
+	pthread_mutex_lock(&(*mutex)->handle);
 #endif
 }
 
-HTSEXT_API void hts_mutexrelease(htsmutex * mutex) {
-  assertf(mutex != NULL && *mutex != NULL);
+HTSEXT_API void hts_mutexrelease(htsmutex* mutex) {
+	assertf(mutex != NULL && *mutex != NULL);
 #ifdef _WIN32
-  assertf((*mutex)->handle != NULL);
-  ReleaseMutex((*mutex)->handle);
+	assertf((*mutex)->handle != NULL);
+	ReleaseMutex((*mutex)->handle);
 #else
-  pthread_mutex_unlock(&(*mutex)->handle);
+	pthread_mutex_unlock(&(*mutex)->handle);
 #endif
 }
 

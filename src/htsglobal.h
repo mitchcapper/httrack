@@ -388,10 +388,10 @@ typedef unsigned long int t_htsboundary;
 typedef struct mlink mlink;
 #endif
 struct mlink {
-  char *adr;
-  int len;
-  int id;
-  struct mlink *next;
+	char* adr;
+	int len;
+	int id;
+	struct mlink* next;
 };
 static const t_htsboundary htsboundary = 0xDEADBEEF;
 #endif
@@ -453,7 +453,7 @@ static const t_htsboundary htsboundary = 0xDEADBEEF;
 #define _HTS_WIDE 1
 #endif
 #if _HTS_WIDE
-extern FILE *DEBUG_fp;
+extern FILE* DEBUG_fp;
 
 #define DEBUG_W(A)  { if (DEBUG_fp==NULL) DEBUG_fp=fopen("bug.out","wb"); fprintf(DEBUG_fp,":>"A); fflush(DEBUG_fp); }
 #undef _
