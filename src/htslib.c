@@ -111,6 +111,7 @@ int IPV6_resolver = 0;
 const char* hts_detect[] = {
   "archive",
   "background",
+  "background-image",
   "data",                       // OBJECT
   "data-src",
   "data-srcset",
