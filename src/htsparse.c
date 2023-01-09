@@ -1928,7 +1928,10 @@ int htsparse(htsmoduleStruct * str, htsmoduleStructExtended * stre) {
               if (strfield(html, "(Empty Reference!)")) {
                 ok = -1;        // No
               }
-
+              // Don't parse data: URI
+              if (strncmp(html, "data:", 5) == 0) {
+                ok = -1;        // No
+              }
             }
 
             if (ok == 0) {      // tester un lien
